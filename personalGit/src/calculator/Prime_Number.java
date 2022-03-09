@@ -7,7 +7,7 @@ public class Prime_Number {
 	public static void prime_number() {
 
 		System.out.println();
-		System.out.println("소수 계산기입니다.");
+		System.out.println("소수 계산기입니다!");
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("2보다 큰 정수를 하나 입력하세요.");
