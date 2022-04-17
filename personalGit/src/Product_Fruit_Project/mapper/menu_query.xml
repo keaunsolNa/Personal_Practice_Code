@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    
+    <entry key="selectAllFruit">
+        SELECT
+        	   A.PRODUCT_NO
+        	 , A.PRODUCT_NATIVE_HABITAT
+  		  	 , A.PRODUCT_NAME
+  		  	 , A.PRODUCT_STOCK
+  		  FROM PRODUCT_FRUIT A
+    </entry>
+    
+    <entry key="selectFruit">
+        SELECT
+        	   A.PRODUCT_NO
+        	 , A.PRODUCT_NATIVE_HABITAT
+  		  	 , A.PRODUCT_NAME
+  		  	 , A.PRODUCT_STOCK
+  		  FROM PRODUCT_FRUIT A
+  		 WHERE A.PRODUCT_NO = ? 
+    </entry>
+
+    <entry key="showallstock">
+        SELECT
+        	   A.PRODUCT_NO	
+        	 , A.PRODUCT_NATIVE_HABITAT
+        	 , A.PRODUCT_NAME
+        	 , A.PRODUCT_STOCK
+          FROM PRODUCT_FRUIT A	  	
+    </entry>
+    
+    <entry key ="showTime">
+        SELECT
+        	   A.PRODUCT_NO
+        	 , A.PRODUCT_NAME
+        	 , C.PRODUCT_TIME_RELEASE_DATE
+        	 , C.PRODUCT_TIME_SHELF_LIFE_DATE
+          FROM PRODUCT_FRUIT A
+          LEFT JOIN PRODUCT_INOUT B ON (A.PRODUCT_NO = B.IO_PRODUCT_NO)
+          LEFT JOIN PRODUCT_TIME C ON (B.IO_PRODUCT_NO = C.PRODUCT_TIME_NO)	   	
+         WHERE A.PRODUCT_NO = ? 
+    </entry>
+    
+    <entry key ="showAllTime">
+        SELECT
+        	   A.PRODUCT_NO
+        	 , A.PRODUCT_NAME
+        	 , C.PRODUCT_TIME_RELEASE_DATE
+        	 , C.PRODUCT_TIME_SHELF_LIFE_DATE
+          FROM PRODUCT_FRUIT A
+          LEFT JOIN PRODUCT_INOUT B ON (A.PRODUCT_NO = B.IO_PRODUCT_NO)
+          LEFT JOIN PRODUCT_TIME C ON (B.IO_PRODUCT_NO = C.PRODUCT_TIME_NO)   
+    </entry>
+    
+  
+    
+    <entry key="deleteFruit">
+      DELETE
+      	FROM PRODUCT_FRUIT
+       WHERE PRODUCT_NO = ?	
+    </entry>
+    
+    
+    <entry key="insertFruit">
+        INSERT
+    	  INTO PRODUCT_FRUIT A
+    	(
+  		  PRODUCT_NO
+  		, PRODUCT_NAME
+  		, PRODUCT_NATIVE_HABITAT
+		, PRODUCT_PRICE
+		, PRODUCT_STOCK
+		)
+		VALUES
+		(
+  		  SEQ_FRUIT.NEXTVAL
+  		, ?
+  		, ?
+		, ?
+		, DEFAULT  
+		)  
+    </entry>
+
+    
+    <entry key="insertinoutFruit">
+      INSERT
+        INTO PRODUCT_INOUT A
+      (
+        IO_PRODUCT_NUMBER
+      , IO_PRODUCT_NO
+      , IO_PRODUCT_AMOUNT
+      , IO_PRODUCT_STATUS  
+      )
+      VALUES
+      (
+        SEQ_IO.NEXTVAL
+      , ?
+      , ?
+      , ?
+      )
+    </entry>
+    
+    
+    <entry key="inserttimefruit">
+      INSERT
+        INTO PRODUCT_TIME A
+      (
+        PRODUCT_TIME_NUMBER
+      , PRODUCT_TIME_NO
+      , PRODUCT_TIME_RELEASE_DATE
+      , PRODUCT_TIME_SHELF_LIFE_DATE 
+      )
+      VALUES
+      (
+        SEQ_TIME.NEXTVAL
+      , ?
+      , DEFAULT
+      , DEFAULT  
+      )
+        
+    </entry>
+    
+</properties>
+
+	

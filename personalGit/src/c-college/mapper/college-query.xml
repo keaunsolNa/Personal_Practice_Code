@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+
+	<entry key="checkStudentNo">
+		SELECT
+			   A.STUDENT_NO
+			 , A.STUDENT_NAME  
+		  FROM TB_STUDENT A
+		 WHERE A.STUDENT_NO = ? 	   	
+	</entry>
+	
+	<entry key="selectAllProfessorName">
+		SELECT
+			   A.PROFESSOR_NAME
+		  FROM TB_PROFESSOR A	   	
+	</entry>
+	<entry key="selectClassByNo">
+	    SELECT
+	    	   A.STUDENT_NAME
+	    	 , B.CLASS_NAME 	
+	      FROM TB_STUDENT A
+	     INNER JOIN TB_CLASS B ON (A.DEPARTMENT_NO = B.DEPARTMENT_NO)     
+	     WHERE A.STUDENT_NO = ?        	
+	</entry>
+	<entry key = "selectCoachProfessorNameByStudentNo">
+		SELECT
+			   B.PROFESSOR_NAME
+		  FROM TB_STUDENT A
+		 INNER JOIN TB_PROFESSOR B ON (A.COACH_PROFESSOR_NO = B.PROFESSOR_NO) 	    	
+		 WHERE A.STUDENT_NO = ?
+	</entry>
+	<entry key= "selectStudentNAmeByNo">
+	    SELECT
+	    	   A.STUDENT_NAME
+	      FROM TB_STUDENT A
+	     WHERE A.STUDENT_NO = ? 	   	
+	</entry>
+	<entry key = "selectPeriodStudentNameByClassName">
+	    SELECT
+	    	   A.STUDENT_NAME
+	      FROM TB_STUDENT A
+	     INNER JOIN TB_CLASS B ON (A.DEPARTMENT_NO = B.DEPARTMENT_NO)
+	     WHERE CLASS_NAME = ?  
+	</entry>
+	
+	<entry key="updateCoachProfessorByName">
+	    UPDATE
+	    	   TB_STUDENT A
+	     SET A.COACH_PROFESSOR_NO = (SELECT DISTINCT C.COACH_PROFESSOR_NO
+	      						       FROM TB_PROFESSOR B
+	      						      INNER JOIN TB_STUDENT C ON(B.PROFESSOR_NO = C.COACH_PROFESSOR_NO)
+	      						      WHERE B.PROFESSOR_NAME = ?
+	      						    )
+	   WHERE A.STUDENT_NO = ?  						 	   	
+	</entry>
+	<entry key="updateCoachProfessorByNo">
+	    UPDATE
+	    	   TB_STUDENT A
+	     SET A.COACH_PROFESSOR_NO = (SELECT DISTINCT C.COACH_PROFESSOR_NO
+	      						       FROM TB_PROFESSOR B
+	      						      INNER JOIN TB_STUDENT C ON(B.PROFESSOR_NO = C.COACH_PROFESSOR_NO)
+	      						      WHERE B.PROFESSOR_NO = ?
+	      						    )
+	   WHERE A.STUDENT_NO = ?  						 	   	
+	</entry>
+	<entry key ="updateAbsenceByNo">
+		UPDATE
+			   TB_STUDENT A
+		   SET A.ABSENCE_YN = ?
+		 WHERE A.STUDENT_NO = ?  	   
+	</entry>
+	
+</properties>
