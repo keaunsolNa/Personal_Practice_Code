@@ -1,7 +1,5 @@
 package com.school.member.view;
 
-public class School_View {
-
-		
+public class School_Student_View {
 
 }
