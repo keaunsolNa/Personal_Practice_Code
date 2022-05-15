@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .main{
+            background-color: aqua;
+            height: auto;
+            margin: auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .main_1{
+            text-align: center;
+            color: blueviolet;
+        }
+
+        .mainmenu{
+            float: left;
+        }
+        #introduceButton{
+            float: right;
+            
+        }
+
+        #fieldset{
+            border: 1px solid white;
+        }
+
+        #name{
+            color: deepskyblue;
+            text-align: center;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="mainpage" class="main" >
+        <h1>Hello World</h1>
+
+    </div>
+
+    <div id="mainpage_1" class="main_1">
+        <p>Here is my Homepage</p>
+    </div>
+    <fieldset id="fieldset">
+        <legend id="name">  나큰솔 </legend>
+
+        <div id="mainpage" class="mainmenu">
+            <p>If you want select my introduce,  <br>
+                You can press a button in Right
+            </p> 
+        </div>
+
+        <div id="introduceButton">
+            <form id="introduceButton">
+                <button onclick="IntroduseMySelf();">자기소개</button> <br>
+                <button onclick="IntroduseMyWork();">작업물</button>
+
+                <script>
+                    function IntroduseMySelf(){
+                        window.open("file://C:/P_PROJECT/Javascript/introduceMySelf.html")
+                    }
+                    function IntroduseMyWork(){
+                        window.open("file://C:/P_PROJECT/Javascript/MyWork.html")
+                    }
+                </script
+            </form>
+        </div>
+    </fieldset>
+</body>
+</html>
