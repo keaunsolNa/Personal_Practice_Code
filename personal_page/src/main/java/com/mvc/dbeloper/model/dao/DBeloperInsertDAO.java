@@ -19,7 +19,7 @@ public class DBeloperInsertDAO {
 		prop = new Properties();
 		
 		try {
-			prop.loadFromXML(new FileInputStream("C:\\Study\\P_PROJECT\\personal_page\\web\\WEB-INF\\mapper\\Select.xml"));
+			prop.loadFromXML(new FileInputStream("C:\\Study\\personal_Project\\personal_page\\web\\WEB-INF\\mapper\\Select.xml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

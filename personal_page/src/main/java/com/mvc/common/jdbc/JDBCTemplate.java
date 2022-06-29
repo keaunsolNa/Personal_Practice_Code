@@ -18,7 +18,7 @@ public class JDBCTemplate {
 		Properties prop = new Properties();
 		
 		try {
-			prop.load(new FileReader("C:\\Study\\P_PROJECT\\personal_page\\web\\WEB-INF\\config\\connetion-info.properties"));
+			prop.load(new FileReader("C:\\Study\\personal_Project\\personal_page\\web\\WEB-INF\\config\\connetion-info.properties"));
 			String driver = prop.getProperty("driver");
 			String url = prop.getProperty("url");
 			

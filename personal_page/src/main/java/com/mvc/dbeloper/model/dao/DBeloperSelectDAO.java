@@ -22,7 +22,7 @@ public class DBeloperSelectDAO {
 		prop = new Properties();
 		
 		try {
-			prop.loadFromXML(new FileInputStream("C:\\Study\\P_PROJECT\\personal_page\\web\\WEB-INF\\mapper\\Select.xml"));
+			prop.loadFromXML(new FileInputStream("C:\\Study\\personal_Project\\personal_page\\web\\WEB-INF\\mapper\\Select.xml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -38,7 +38,6 @@ public class DBeloperSelectDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
-			pstmt.setString(2, password);
 			
 			
 			rset = pstmt.executeQuery();

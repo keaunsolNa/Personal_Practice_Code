@@ -6,8 +6,7 @@
 		SELECT
 			   MEM_PWD
 		  FROM MEMBER
-		 WHERE MEM_ID = ?
-		   AND MEM_PWD = ? 	   
+		 WHERE MEM_ID = ?   
 	</entry>
 	
 	<entry key="InsertMember">
