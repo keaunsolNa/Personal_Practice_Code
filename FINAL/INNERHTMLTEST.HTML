@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>    
+</head>
+<body>
+
+    <div name="divTag">
+        <h3>TEST</h3>
+            <input type="radio" name="CHECK_1" value="Y">
+            <label for="agree">예</label>
+            <input type="radio" name="CHECK_1" value="N">
+            <label for="agree">아니오</label>
+            <br>
+            <input type="radio" name="CHECK_2" value="Y">
+            <label for="agree">예</label>
+            <input type="radio" name="CHECK_2" value="N">
+            <label for="agree">아니오</label>
+            <br>
+            <input type="radio" name="CHECK_3" value="Y">
+            <label for="agree">예</label>
+            <input type="radio" name="CHECK_3" value="N">
+            <label for="agree">아니오</label>
+            <br>
+            <input type="radio" name="CHECK_4" value="Y">
+            <label for="agree">예</label>
+            <input type="radio" name="CHECK_4" value="N">
+            <label for="agree">아니오</label>
+            <br>
+            <input type="textarea" name="CHECK_5">
+
+            <button class="button" onclick="checkAnswer()">SubmitAnswer</button>
+            <button onclick="window.print()">저장된 HTML 값 화면으로 출력</button>
+        </div>
+
+        <h3>TEST</h3> 
+
+</body>
+
+
+<script>
+
+window.onload = function(){
+    var jbHtml="";
+    $( document ).ready( function() {
+        var jbHtml = $( 'div' ).html();
+        // document.write(jbHtml);
+        
+    } );
+}
+
+</script>
+
+
+</html>
