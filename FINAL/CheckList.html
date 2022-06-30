@@ -26,7 +26,7 @@
 
         .checklist{
             background-color: rgba(104, 228, 255, 1);
-            width: 25%;
+            width: 15%;
             height: 35%;
             border: 1px solid black;
             margin: auto;
@@ -40,14 +40,12 @@
             transform: scale(2);
         }
 
-        .beforePic{
-            border: 1px solid black;
-            width: 30%;
-        }
-
-        .afterPic{
-            border: 1px solid black;
-            width: 30%;
+        .pic{
+            width: 15%;
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center;
+            
         }
 
         .sign{
@@ -61,13 +59,84 @@
             margin: auto;
         }
 
+        .canvas{
+            border:1px solid black
+        }
+
+        .content-img-area {
+        	width:150px;
+	        height:100px;
+	        border:2px dashed darkgray;
+	        text-align:center;
+            margin: auto;
+	        display:table-cell;
+	        vertical-align:middle;
+        }
+
+        .content-img{
+            width: "120"; 
+            height: "100";
+        }
+        
+        .adminOpnionArea{
+            background-color: rgba(104, 228, 255, 1);
+            width: 50%;
+            text-align: center;
+        }
+        
+        .employeeOpnionArea{
+            background-color: rgba(104, 228, 255, 1);
+            width: 50%;
+            text-align: center;
+        }
+
+        .OpnionArea{
+            text-align: center;
+        }
+
+        .OpnionArea label{
+            font-size: x-large;
+            margin-top: 0px;
+            text-align: center;
+        }
+
+        .OpnionArea textarea{
+            width: 500px;
+            height: max-content;
+            border: 0px;
+            resize: none;
+            margin-top: 30px;
+        }
+
+        .adminOpnionArea input{
+            transform: none;
+            border: 0px;
+            background-color:  gainsboro;
+        }
+
+        .employeeOpnionArea input{
+            transform: none;
+            border: 0px;
+            background-color:  gainsboro;
+        }
+
+        .Opnion{
+            transform: none;
+            resize: none;
+            text-align: center;
+        }
+
+        .canvasbtn{
+            text-align: center;
+        }
+
     </style>
 
 </head>
 
 <body>
 
-    <section>
+    <section id="checklist">
         <div class="logintopnav col-sm-3">
             <h1>CLEANUP</h1>
         </div>
@@ -112,27 +181,35 @@
             <input type="checkbox" name="additionalCheck5"> 반려동물<br>
             <input type="checkbox" name="additionalCheck5"> 복층<br>
         </div>
-<!-- 
-        <div>
 
-            <div class="beforePic">
-
-            </div>
-            
-            <div class="afterPic">
-
-            </div>
-            
-        </div> -->
-        <div class="sign">
+        <div class="pic col-sm-3">
+            <tr class="pic">
+                <td>
+                    <div class="content-img-area" id="contentImgArea1">
+                        <img id="contentImg1" class="contentImg">
+                        <span>BEFORE</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="content-img-area" id="contentImgArea2">
+                        <img id="contentImg2" class="contentImg">
+                        <span>AFTER</span>
+                    </div>
+                </td>
+            </tr>
+        </div>
+        
+        <br>
+        <div class="sign col-sm-3">
                     
             <div>    
-                <canvas id="canvas" style="border:1px solid black"></canvas>  
+                <canvas id="canvas" class="canvas"></canvas>  
             </div>  
             
-            <div>    
-                <button id="save" class="savebtn">save</button>  
-            <div>  
+            <div class="canvasbtn">    
+                <button id="save" class="savebtn">제출</button>  
+                <button id="reset" class="savebtn">취소</button>
+            </div>
 
                 <script>    
                 (function(obj){      
@@ -253,16 +330,38 @@
                                 form.remove();          
                             });        
                             
+                            $("#reset").on("click", function(){
+
+                                ctx.clearRect(0, 0, 800, 600);
+                            })
+
                         },        
                         
                         onLoad: function(){          
                             canvasResize();        
                             }}})());  
                 </script>
-            </div>
-        </div>
 
         </div>
+
+        <br>
+        <div class="OpnionArea">
+        <div class="adminOpnionArea">
+            <label>관리자 의견</label><br>
+            <textarea class="Opnion" cols="100%" rows="3"></textarea>
+            <br>
+            <input type="button" value="등록">
+        </div>
+
+        <br>
+
+        <div class="employeeOpnionArea">
+            <label>직원 의견</label><br>
+            <textarea class="Opnion" cols="100%" rows="3"></textarea>
+            <br>
+            <input type="button" value="등록">
+        </div>
+    </div>
     </section>
 </body>
 </html>
