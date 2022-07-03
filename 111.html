@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        #test{
+            background: pink !important;
+        }
+    </style>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button>일반버튼</button>
+    <button class="btn">일반버튼</button>
+    <button class="btn btn-primary" style="background:red;">일반버튼</button>
+    <button class="btn btn-success">일반버튼</button>
+    <button class="btn btn-warning">일반버튼</button>
+    <button class="btn btn-info" id="test">일반버튼</button>
+    <button class="btn btn-danger">일반버튼</button>
+
+    <button class="btn btn-primary btn-sm">작은 버튼</button>    
+    <button class="btn btn-primary btn-xs">큰 버튼</button>    
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>주소</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>신사임당</td>
+                <td>20</td>
+                <td>경상남도 창원시 마산회원구</td>
+            </tr>
+            <tr>
+                <td>이순신</td>
+                <td>19</td>
+                <td>서울시 광진구 화양동</td>
+            </tr>
+            <tr>
+                <td>유관순</td>
+                <td>18</td>
+                <td>경기도 인천광역시 중구</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan='2'>총 인원</td>
+                <td>3명</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- 웹 반응형을 위한 grid system 활용 -->
+    <!--
+         container 및 container-fluid를 활용해서 작성
+
+         container는 정해진 고정 넓이의 wrapper 개념으로 사용
+         container-fluid는 화면에 꽉 차게 표현
+    -->
+    <!--  
+         .col-sm-* : 576px 이하에서 세로로 표시 시작(small)
+         .col-md-* : 768px 이하에서 세로로 표시 시작(medium)
+         .col-lg-* : 992px 이하에서 세로로 표시 시작(large)
+         .col-xl-* : 1200px 이하에서 세로로 표시 시작(xlarge)
+         .col-xxl-* : 1400px 이하에서 세로로 표시 시작(xxlarge)
+    -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">col-sm-3</div>
+            <div class="col-sm-3">col-sm-3</div>
+            <div class="col-sm-3">col-sm-3</div>
+            <div class="col-sm-3">col-sm-3</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">col-md-3</div>
+            <div class="col-md-3">col-md-3</div>
+            <div class="col-md-3">col-md-3</div>
+            <div class="col-md-3">col-md-3</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">col-lg-3</div>
+            <div class="col-lg-3">col-lg-3</div>
+            <div class="col-lg-3">col-lg-3</div>
+            <div class="col-lg-3">col-lg-3</div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3">col-xl-3</div>
+            <div class="col-xl-3">col-xl-3</div>
+            <div class="col-xl-3">col-xl-3</div>
+            <div class="col-xl-3">col-xl-3</div>
+        </div>
+        <div class="row">
+            <div class="col-xxl-3">col-xxl-3</div>
+            <div class="col-xxl-3">col-xxl-3</div>
+            <div class="col-xxl-3">col-xxl-3</div>
+            <div class="col-xxl-3">col-xxl-3</div>
+        </div>
+    </div>
+
+    <!-- 메뉴 아래로 내려오기 -->
+    <nav class="navbar navbar-expand-sm bg-light">
+        <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+            <a class="nav-link" href="#">Link 1</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Link 2</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Link 3</a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+
+    <!-- 웹 반응형 네비게이션 버튼 만들기 -->
+      <!-- 
+           관련 설명 https://getbootstrap.kr/docs/5.0/components/navbar/
+      -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
