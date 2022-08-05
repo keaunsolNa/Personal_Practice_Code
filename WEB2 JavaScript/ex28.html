@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script>
+    function nightDayHandler(self){
+        var target = document.querySelector('body');
+        if(self.value === 'night'){
+          target.style.backgroundColor ='black';
+          target.style.color='white';
+          self.value = 'day';
+
+          var alist = document.querySelectorAll('a');
+          var i = 0;
+          while(i < alist.length){
+        alist[i].style.color = 'powderblue';
+        i = i + 1;
+    }
+        } else {
+          target.style.backgroundColor ='white';
+          target.style.color='black';
+          self.value = 'night';
+
+          var alist = document.querySelectorAll('a');
+          var i = 0;
+          while(i < alist.length){
+        alist[i].style.color = 'blue';
+        i = i + 1;
+        }
+      }
+    }
+    </script>
+    <title>
+      WEB1 - Javascript
+    </title>
+  </head>
+  <body>
+    <h1><a href="index.html">WEB</a></h1>
+
+    <input type="button" value="night" onclick="
+    nightDayHandler(this);
+    ">
+    <ol>
+      <li><a href="1.html">HTML</a></li>
+      <li><a href="2.html">CSS</a></li>
+      <li><a href="3.html">Javascript</a></li>
+    </ol>
+    <h2>Javascript</h2>
+    <p>
+      Javascript is blabla
+    </p>
+    <input type="button" value="night" onclick="
+    nightDayHandler(this);
+    ">
+  </body>
+</html>
