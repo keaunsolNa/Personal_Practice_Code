@@ -48,4 +48,10 @@ public class LinkedCollection extends AbstractCollection{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
 }

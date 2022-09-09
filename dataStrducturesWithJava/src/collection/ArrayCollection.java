@@ -53,5 +53,11 @@ public class ArrayCollection extends AbstractCollection{
 		return false;
 	}
 
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
