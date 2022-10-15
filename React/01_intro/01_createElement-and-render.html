@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 리엑트 공식 사이트의 시작하기 들어가서 문서에 있는 CDN을 복사해서 넣어준다.-->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script>
+
+        /*
+            React.createElement를 사용해 h1번 태그를 표현하는 엘리먼트를 만들 수 있다. 
+            첫 번째 인자 : 만들려는 엘리먼트의 타입을 문자열로 정의한다.
+            두 번째 인자 : 만드는 엘리먼트의 프로퍼티를 표현한다.
+            세 번째 인자 : 엘리먼트의 자식 노드를 표현한다.
+
+            렌더링 과정에서 리엑트는 이 엘리먼트를 실제 DOM엘리먼트로 변환한다. 
+
+            리엑트 엘리먼트는 단지 리엑트에게 DOM 엘리먼트를 구성하는 방법을 알려주는 자바스크립트의 객체에 불과하다.
+            (실제 DOM이 아닌 가상 DOM의 개념)
+        */
+        const greetingElement = React.createElement('h1', {id: 'greeting'}, 'hello world!!');
+
+        // const domContainer = document.getElementById('root');
+        // const root = ReactDOM.createRoot(domContainer);
+        // root.render(greetingElement);
+
+        ReactDOM.createRoot(document.getElementById('root')).render(greetingElement);
+    </script>
+
+</body>
+</html>
