@@ -1,0 +1,39 @@
+
+body{
+    
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    background-repeat : no-repeat;
+    background-size : cover;
+    
+}
+
+.inputLine{
+    border: 0px;
+    background: none;
+    text-align: center;
+    text-decoration-color: black;
+    border-bottom: 1px solid black ;
+    color: black;
+    width: 350px;
+}
+
+.inputLine2{
+    border: 0px;
+    background: none;
+    text-align: center;
+    text-decoration-color: black;
+}
+
+.inputLineBox{
+    width: 400px;
+    height: 50px;
+    margin-left: 38%;
+}
+
+input::placeholder {
+font-weight: bold;
+color: black;
+}
+
