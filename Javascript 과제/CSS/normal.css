@@ -33,7 +33,22 @@ body{
 }
 
 input::placeholder {
-font-weight: bold;
-color: black;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+.subForcusBar{
+    width: 400px;
+    text-align: center;
+    margin: auto;
+}
+
+.subForcusBar button {
+    color: black;
+    background-color: white;
+    width: 150px;
+    text-align: center;
+    border: 0px;
 }
 

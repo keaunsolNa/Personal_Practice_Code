@@ -5,18 +5,20 @@ function saveFocus(){
 
     function submitSubFocus() {
         const text = subFocusInput.value;
-        var arr = {
-            'id' : id,
-            'value' : text
-        }
-        alert(id)
-        localStorage.setItem(id, JSON.stringify(arr));
+        let arr =
+        [
+            {
+                key : id, 
+                value : text
+            }
+        ]
+            
+        var newlang = JSON.parse(localStorage.getItem("subForcus") || "[]");
+        newlang.push(arr);
+        localStorage.setItem('subForcus', JSON.stringify(newlang));
+        
     }
 
-    subFocus.addEventListener("submit", submitSubFocus);
+    subFocus.addEventListener('submit', submitSubFocus);
 
-    alert(id);
-    if(localStorage.getItem(id) != null){
-        document.getElementById("saveLocalStorageSubFocus").innerHTML += text;
-    }
 }

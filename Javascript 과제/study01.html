@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="CSS/normal.css">
     <script src="Array/imgFile.js"></script>
     <script src="JS/showClock.js"></script>
-    <!-- <script src="JS/geolocation.js"></script> -->
+    <script src="JS/geolocation.js"></script>
     <script src="Array/Aphorism.js"></script>
     <script src="JS/localStorageName.js"></script>
     <script src="JS/localStorageMainFocus.js"></script>
     <script src="JS/localStorageSubFocus.js"></script>
+    <script src="JS/addTag.js"></script>
     <title>Document</title>
 
 </head>
 
 <body id="Body">
-    <div id="mainPage"
-    >
+    <div id="mainPage">
         <script>
             document.getElementById("Body").style.backgroundImage = getImg();
         </script>
@@ -38,7 +38,6 @@
                 saveName();
             </script>
         </form>
-
         <br>
 
         <form id="saveLocalStorageMainFocus">
@@ -58,8 +57,10 @@
 
         </form>
 
-        <div id="inputTextDivLine">
-
+        <div id="tagArea">
+            <script>
+                create_liTag();
+            </script>
         </div>
         <br>
 

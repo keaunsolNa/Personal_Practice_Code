@@ -54,8 +54,8 @@ const aphorism = [
 
 function getAphorism(){
     document.getElementById("aphorismDiv").innerHTML = 
-    aphorism[Math.floor(Math.random()*10)].text + aphorism[Math.floor(Math.random()*10)].author;
-    document.getElementById("aphorismDiv").style.color="black"
+    aphorism[Math.floor(Math.random()*10)].text + " " + aphorism[Math.floor(Math.random()*10)].author;
+    document.getElementById("aphorismDiv").style.color="white"
 }
 
 

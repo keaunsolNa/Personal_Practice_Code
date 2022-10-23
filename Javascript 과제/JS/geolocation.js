@@ -15,7 +15,7 @@ function onGeoOk(position) {
             nowTemp = data.main.temp;
             nowCity = data.name;
             document.getElementById('weatherDiv').innerHTML = `City : ${nowCity},  Weather : ${nowWeather}, Temperature : ${nowTemp}`;
-            document.getElementById("weatherDiv").style.color="black"
+            document.getElementById("weatherDiv").style.color="white"
         })
     }
     

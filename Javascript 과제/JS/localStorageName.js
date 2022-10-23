@@ -12,6 +12,5 @@ function saveName(){
         localStorage.setItem("name", text);
     }
     name.addEventListener("submit", submitName);
- 
 
 }
