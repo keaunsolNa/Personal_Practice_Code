@@ -56,7 +56,7 @@ console.log(`front: ${front}`);                                                 
 
 /* splice(index, 제거수, 추가값1, 추가값2, ...) */
 console.log(`front.splice(3, 1, "JDBC") : ${front.splice(3, 1, "JDBC")}`);                  // front.splice(3, 1, "JDBC") : React
-console.log(`front : ${front}`);                                                            // front : HTML,CSS,Javascript,JDBC (원본에 영향을 주지 않는다.)
+console.log(`front : ${front}`);                                                            // front : HTML,CSS,Javascript,JDBC (원본에 영향을 준다.)
 
 /* join : 배열을 구분자로 결합하여 문자열로 반환 */
 const snackList = ['사탕', '초콜렛', '껌', '과자'];
