@@ -1,4 +1,3 @@
-navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
 function onGeoOk(position) {
     const API_KEY = "0e95f5536a096d6e41ea4ca5a700ff22";
     const latitude = position.coords.latitude;

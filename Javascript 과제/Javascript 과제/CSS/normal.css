@@ -1,0 +1,65 @@
+
+body{
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    background-repeat : no-repeat;
+    background-size : cover;
+    margin-top: 10%;
+}
+
+.inputLine{
+    border: 0px;
+    background: none;
+    text-align: center;
+    text-decoration-color: white;
+    border-bottom: 1px solid white ;
+    color: white;
+    width: 350px;
+}
+
+.inputLine input{
+    border: none;
+    background: none;
+    color: white;
+}
+
+#inputBox{
+    display: inline-block;
+    text-align: center;
+}
+
+input::placeholder {
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.subForcusBar{
+    width: 400px;
+    text-align: left;
+    margin-left: 41%;
+    color: white;
+}
+
+.subForcusBar button {
+    margin-left: 30px;
+    color: white;
+    background: none;
+    width: 60px;
+    text-align: center;
+    border: 1px solid white;
+}
+
+.Clock{
+    color: white;
+    font-size:150px;
+    display: inline-block
+}
+
+.Div2{
+    color: white; 
+    font-size: small
+}
+
+

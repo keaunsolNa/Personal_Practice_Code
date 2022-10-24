@@ -20,6 +20,7 @@
 
 <body id="Body">
     <div id="mainPage">
+
         <script>
             document.getElementById("Body").style.backgroundImage = getImg();
         </script>
@@ -30,48 +31,68 @@
             </script>
         </div>
 
-        <br>
-
-        <form id="saveLocalStorageName" >
-            <input type="text"  placeholder="What is your name?">
+        <div id="divClockSecond" class="Clock">
             <script>
-                saveName();
+                showClock();
             </script>
-        </form>
-        <br>
+        </div>
 
-        <form id="saveLocalStorageMainFocus">
-            <input type="text" placeholder="What is your main focus today?">
-            <script>
-                saveMainFocus();
-            </script>
-        </form>
+        <br clear="left"><br>
 
-        <br>
+        <div id="inputBox">
 
-        <form id="saveLocalStorageSubFocus">
-            <input type="text" placeholder="Add todo here...">
-            <script>
-                saveFocus();
-            </script>
+            <form id="saveLocalStorageName" class="inputLine">
+                <input type="text"  placeholder="What is your name?">
+                    <script>
+                        saveName();
+                    </script>
+            </form>
 
-        </form>
+            <br>
+        
+            <form id="saveLocalStorageMainFocus" class="inputLine">
+                <input type="text" placeholder="What is your main focus today?">
+                    <script>
+                        saveMainFocus();
+                    </script>
+            </form>
+        
+            <br>
+        
+            <form id="saveLocalStorageSubFocus" class="inputLine">
+                <input type="text" placeholder="Add todo here...">
+                    <script>
+                        saveFocus();
+                    </script>
+            </form>
+
+        </div>
+
+        <br><br>
 
         <div id="tagArea">
             <script>
                 create_liTag();
             </script>
         </div>
+
         <br>
 
-        <div style="color: white; font-size: small;" id="aphorismDiv" class="aphorismDiv">
+        <div id="aphorismDiv" class="Div2">
             <script>
                 getAphorism();
             </script>
         </div>
+
         <br>
-        <div style="color: white; font-size: small;" id="weatherDiv" class="weatherDiv">
+
+        <div id="weatherDiv" class="Div2">
+            <SCRIPT>
+                navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
+                onGeoOk(position);
+            </SCRIPT>
         </div>
+        
         <br>
     
     </div>
