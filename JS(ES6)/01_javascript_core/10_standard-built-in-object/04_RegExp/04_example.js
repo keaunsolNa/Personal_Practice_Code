@@ -57,3 +57,7 @@ let regex = /(?:https:)([\/a-z\.]+)/;                   // https: 가 있어도 
 console.log(target3.match(regex));
 
 /* 7. 한글 범위 여부 검사 */
+/* 한글범위 : [가~힣] */
+/* 한글로만 된 2~4글자(이름) */
+let name = '홍길동';
+console.log(/^[가-힣]{2,4}$/.test(name));               // true
