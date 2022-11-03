@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .area {
+            width: 100px;
+            height: 100px;
+            border: 1px solid lightgray;
+        }
+    </style>
+
+    <title>01_use_id</title>
+</head>
+<body>
+    <h1>01. id를 이용한 요소 노드 취득</h1>
+
+    <div id="area1" class="area">
+        div 영역1
+        <p id="area2">p 영역</p>
+    </div>
+
+    <div id="area1" class="area">
+        div영역2
+    </div>
+
+    <script>
+        // let num = 1;
+
+        /* 변수 이름 앞에 $표시를 붙여서 해당 변수는 html 요소를 지니고 있음을 나타내기 위한 관례상 네이밍 규칙 */
+        /* 해당 아이디를 가진 요소들 중 첫 번째 요소 하나만 반환한다. */
+        const $elem = document.getElementById('area1');
+
+        console.log($elem);
+
+        /* 요소의 스타일 속성을 이용하여 배경색 변경(요소에 css 적용) */
+        // $elem.style.backgroundColor = 'skyblue';
+        $elem.style['background-color'] = 'skyblue';                // 대괄호([])를 이용하면 기존의 css 속성명을 사용할 수 있다.
+
+        const $elem2 = document.getElementById('area2');
+        $elem2.style.backgroundColor = 'blue';                      // WEB API
+
+        /* id 속성 값을 그대로 딴 이름으로 요소에 접근도 가능하다. */
+        // let area2 = 1;                   // 하지만 id값과 동일한 이름의 전역 변수가 있을 경우 이름 충돌이 있어 지향하는 것이 좋다.
+        area2.style.backgroundColor = 'red';
+
+        /* id에 해당하는 HTML 요소가 없을 시 null을 반환한다. */
+        const $elem3 = document.getElementById('area3');
+        console.log($elem3);                // null
+    </script>
+</body>
+</html>
+
+<!--
+    자바스크립트는 script 태그 안에 작성하며 어디에 만들어도 상관 없고 따로 만들어도 한 영역으로 취급 됨.
+    하지만 주로 관련있는 html 태그 근처나 body 태그의 종료 태그 직전에 작성하는 편이다. 
+-->
+<script>
+    // console.log(num);
+</script>

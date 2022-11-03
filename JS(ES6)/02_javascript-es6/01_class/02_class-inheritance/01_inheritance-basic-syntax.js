@@ -25,6 +25,11 @@ animal.move(0.5);                                           // 동물(은)는 �
 class Human extends Animal {
 
     /* 생성자를 생략하면 super()를 활용해 부모 constructor를 사용하게 된다. */
+    // constructor(name, weight){
+    //     super(name, weight);
+    // }
+
+    // /* 상속 받고 추가적으로 프로퍼티를 가지고 싶으면 아래와 같이 작성한다. */
     // constructor(name, weight, language){
     //     super(name, weight);
     //     this.language = language;
@@ -33,9 +38,9 @@ class Human extends Animal {
     develop(language){
         console.log(`${this.name}(은)는 ${language}로 개발을 합니다. 정말 즐겁습니다.`);
         /* 부모 필드에는 접근 불가능 */ 
-        console.log(`${super.name}`);                       // undefined
+        // console.log(`${super.name}`);                       // undefined
         /* 메소드는 prototype 객체로부터 상속이기에 접근 가능 */
-        super.eat(2);                                       // 수강생(은)는 2kg의 식사를 하고 73kg이 되었습니다.
+        // super.eat(2);                                       // 수강생(은)는 2kg의 식사를 하고 73kg이 되었습니다.
     }
 }
 

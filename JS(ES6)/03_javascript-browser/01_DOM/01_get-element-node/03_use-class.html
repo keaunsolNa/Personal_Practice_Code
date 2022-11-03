@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03. use-class</title>
+</head>
+<body>
+    <h1>03. Class를 이용한 요소 노드 획득</h1>
+
+    <ul id="available">
+        <li class="drink coffe">커피</li>
+        <li class="drink coke">콜라</li>
+        <li class="drink milk">우유</li>
+    </ul>
+    <ul id="unavailable">
+        <li class="drink soju">소주</li>
+        <li class="drink beer">맥주</li>
+    </ul>
+
+    <script>
+
+        /* class 이름이 drink인 요소들을 가져와서 HTMLCollection 타입으로 반환 */
+        const $drinks = document.getElementsByClassName("drink");
+        console.log($drinks);
+        console.log($drinks.length);
+
+        [...$drinks].forEach($drinks => $drinks.style.color = 'red');
+
+        const $coffe = document.getElementsByClassName('drink coffe');
+        console.log($coffe[0].innerHTML);
+    </script>
+</body>
+</html>

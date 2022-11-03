@@ -19,3 +19,5 @@ function displayProduct2({producer = "아무개", items = [], width = 10, height
 }
 
 displayProduct2(exampleProduct);
+
+/* 함수의 매개변수에서 객체의 구조분해 할당을 사용하면 객체 인수 하나만 던지면 되고 순서에 구애받지 않아도 되는 이점이 있다. */
