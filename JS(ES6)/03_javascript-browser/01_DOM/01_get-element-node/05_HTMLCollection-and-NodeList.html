@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .white { color: white; }
+        .black { color: black; }
+        .blue { color: blue; }
+        .red { color: red; }
+    </style>
+    <title>05. HTMLCollection-and-NodeList</title>
+</head>
+<body>
+    <h1>05. HTMLCollection과 NodeList</h1>    
+    <pre>
+        HTMLCollection과 NodeList는 DOM API가 여러 개의 결과 값을 반환하기 위한 DOM 컬렉션 객체이다.
+    </pre>
+
+    <h3>HTMLCollection</h3>
+    <p>
+        getElementByTagName, GetElementByClassName 메소드가 반환하는 객체이다. 
+        노드 객체의 상태 변화를 실시간으로 반영하는 살아있는(live) DOM 컬렉션 객체이다.
+    </p>
+
+    <ul>
+        <li class="li white">착한 사람 눈에만 보이는 첫 번 글</li>
+        <li class="li white">착한 사람 눈에만 보이는 두 번 글</li>
+        <li class="li white">착한 사람 눈에만 보이는 세 번 글</li>
+    </ul>
+
+    <script>
+        const $whiteList = document.getElementsByClassName('white');
+
+        console.log($whiteList);
+
+        /* HTMLCollection은 들어있는 값이 실시간으로 반환 되므로 의도치 않은 결과가 발생할 수 있다. */
+        // for(let i = 0; i < $whiteList.length; i++){
+        //     $whiteList[i].className = 'black';
+        // }
+
+        /* 해결1. 역순으로 반복을 돌린다. */
+        // for(let i = $whiteList.length - 1; i >= 0; i--){
+        //     $whiteList[i].className = 'black';
+        // }
+
+        /* 해결2. while문을 활용한다.*/
+        // let i = 0;
+        // while($whiteList.length > 0){
+        //     $whiteList[i].className = 'black';
+        // }
+
+        /* 해결3. HTMLCollcetion 객체를 사용하지 않고 배열로 반환하는 것이 가장 권장된다. */
+        [...$whiteList].forEach(list => list.className = 'black');
+        // Arrays.from($whiteList).forEach(list => list.className = 'black');
+    </script>
+
+    <h3>NodeList</h3>
+    <p>
+        querySelectorAll 메소드가 반환하는 객체이다.
+        실시간으로 노드 객체의 상태를 변경하지 않기(non-live)때문에 HTMLCollection의 부작용을 해결할 수 있다.
+    </p>
+
+    <ul id="list">
+        <li class="red">빨간 휴지 줄까~ 파란 휴지 줄까~</li>
+        <li class="red">빨간 휴지 줄까~ 파란 휴지 줄까~</li>
+        <li class="red">빨간 휴지 줄까~ 파란 휴지 줄까~</li>
+    </ul>
+
+    <script>
+        const $redList = document.querySelectorAll('.red');
+        $redList.forEach(list => list.className = 'blue');
+    </script>
+</body>
+</html>

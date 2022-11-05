@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. parent node</title>
+</head>
+<body>
+    <h1>02. 부모 노드 탐색</h1>
+
+    <script>
+        console.log('=== HTML ===');
+        console.log(document.documentElement);      // DOM Tree상에서 document 아래 요소들
+        console.log("=== HEAD ===");
+        console.log(document.head);                 
+        console.log("=== BODY ===");
+        console.log(document.body);
+        console.log("=== HEAD의 parentNode ===");
+        console.log(document.body.parentNode);
+    </script>
+
+    <ul id="lists">
+        <li class="coffe">커피</li>
+        <li class="coke">콜라</li>
+        <li class="milk">우유</li>
+    </ul>
+
+    <script>
+        const $coke = document.querySelector('.coke');
+
+        console.log($coke.parentNode);              // ul 태그 반환
+        /* parentNode는 자식 태그의 직속 부모 태그로 찾아가는 것이며, 연달아 찾아갈 수 있다. */
+        console.log($coke.parentNode.parentNode);   // body 태그 반환 
+    </script>
+</body>
+</html>

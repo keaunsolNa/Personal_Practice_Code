@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04. use-css</title>
+    <style>
+        .area{
+            width: 100px;
+            height: 100px;
+            border: 1px solid lightgray;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>04. css 선택자를 이용한 요소 노드 찾기</h1>
+    
+    <div class="area">
+        <p>first</p>
+    </div>
+    <div class="area">
+        <p>second</p>
+    </div>
+
+    <script>
+        /* querySelector를 사용하면 css의 선택자를 그대로 활용할 수 있다. */
+        const $area = document.querySelector('.area');              // 첫번째 하나의 요소만 반환
+        // const $area = document.querySelectorAll('.area');        // 해당하는 요소들을 NodeList 타입으로 반환한다.
+        console.log($area);
+
+        $area.style.backgroundColor = "gray";
+
+        const $first = $area.querySelector('p');
+        console.log($first);
+
+        $first.style.color = "white";
+
+        const $noElem = document.querySelector(".noElem");
+        console.log($noElem);
+    </script>
+
+    <ul id="list">
+        <li class="drink">커피</li>
+        <li class="drink">콜라</li>
+        <li class="food">김치찌개</li>
+        <li class="food">된장찌개</li>
+    </ul>
+
+    <script>
+        const $lists = document.querySelectorAll('ul#list > li');
+        console.log($lists);
+
+        /* querySelectorAll로 반환된 NodeList는 HTMLCollection과 달리 forEach 메소드를 바로 사용할 수 있다. */
+        // [...$lists].forEach(list => list.style.background = 'yellow');      // 스프레드 문법으로 배열로 반환한다고 문제가 되진 않는다.
+        $lists.forEach(list => list.style.background = 'yellow');
+
+        const $foodList = document.getElementById('list').querySelectorAll('.food');
+        console.log($foodList);
+
+        $foodList.forEach(food => food.style.color = 'white');
+    </script>
+</body>
+</html>

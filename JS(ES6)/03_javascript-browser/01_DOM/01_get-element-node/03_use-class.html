@@ -29,7 +29,17 @@
         [...$drinks].forEach($drinks => $drinks.style.color = 'red');
 
         const $coffe = document.getElementsByClassName('drink coffe');
-        console.log($coffe[0].innerHTML);
+        console.log($coffe[0].innerHTML);       // 가져온 요소의 프로퍼티에 접근할 수 있다. 그리고 innerHTML은 내부 HTML요소까지 읽어온다.
+        console.log($coffe[0].innerText);       // innerText는 내부 Text 노드만 읽어온다.
+        console.log($coffe[0].__proto__);
+
+        const $available = document.getElementById('available');
+        const $availableDrinks = $available.getElementsByClassName('drink');
+        console.log($availableDrinks); 
+
+        /* 해당 class를 갖는 요소가 없을 경우 빈 HTMLCollection 객체 반환 */
+        const $noElem = $available.getElementsByClassName('somac');
+        console.log($noElem);
     </script>
 </body>
 </html>

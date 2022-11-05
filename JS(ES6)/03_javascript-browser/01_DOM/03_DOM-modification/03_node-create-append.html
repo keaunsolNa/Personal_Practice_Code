@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03. node-create-append</title>
+</head>
+<body>
+    <h1>03. 노드 생성과 추가</h1>
+    <p>
+        createElement(tagName): 인수로 전달받은 태그 이름에 해당하는 요소 노드를 생성하여 반환
+        createTextNode(text): 인수로 전달받은 텍스트 값으로 텍스트 노드를 생성하여 반환
+        appendChild(childNode): 인수로 전달받은 노드를 appendChild 메소드를 호출한 노드의 마지막 자식 노드로 추가 (innerHTML과 유사)
+    </p>
+
+    <ul id="drink">
+        <li>커피</li>
+    </ul>
+
+    <script>
+        const $drink = document.getElementById('drink');
+
+        /* 요소 노드 생성 */
+        const $li = document.createElement('li');               // <li><li>
+
+        /* 텍스트 노드 생성 */
+        const textNode = document.createTextNode('콜라');       // '콜라'
+
+        $li.appendChild(textNode);                              // <li>콜라</li>
+
+        $drink.appendChild($li);
+    </script>
+
+    <h3>복수의 노드 생성과 추가</h3>
+    <ul id="food">
+        <li>김치찌개</li>
+    </ul>
+
+    <script>
+        const $food = document.getElementById('food');
+
+        /* 배열 안에 들어있는 값만큼 li태그 만들어 노드 생성하기 */
+        ['된장찌개', '고등어구이', '순대국'].forEach( text => {
+            // console.log(text);
+
+            const $li = document.createElement('li');
+            // const textNode = document.createTextNode(text);
+            // $li.appendChild(textNode);
+
+            $li.textContent = text;             // 요소 노드의 자식 노드로 텍스트 노드를 추가하는 것 보다 textContent 사용이 간편하다.
+        
+            $food.appendChild($li);
+        });
+    </script>
+</body>
+</html>

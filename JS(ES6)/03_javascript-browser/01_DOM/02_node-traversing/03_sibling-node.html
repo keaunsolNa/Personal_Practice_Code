@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_sibling-node</title>
+</head>
+<body>
+    <h1>03. 형제 노드 탐색</h1>
+    <ol id="element">
+        <li>previousElementSibling: 형제 요소 노드 중 자신의 이전 형제 요소 노드를 탐색하여 반환</li>
+        <li>nextElementSibling: 형제 요소 노드 중 자신의 다음 형제 요소 노드를 탐색하여 반환</li>
+    </ol>
+
+    <script>
+        const $element = document.getElementById('element');
+        console.log($element);
+
+        for(let prop in $element){
+            if(prop == 'previousElementSibling')
+            console.log(prop);
+        }
+
+        /* 형제 요소 중 이전 요소 노드를 가진 프로퍼티 활용 */
+        // const previousElementSibling = $element.previousElementSibling;
+        const {previousElementSibling} = $element;              // 객체 구조분해 할당으로 할 수도 있다.
+        console.log(previousElementSibling);
+
+        /* 자식 중 첫번째 요소 노드를 가진 프로퍼티 활용 */
+        const {firstElementChild} = $element;
+        console.log(firstElementChild);
+
+        /* 현재 요소 중 이후 요소 노드를 가진 프로퍼티 활용 */
+        const {nextElementSibling} = firstElementChild;
+        console.log(nextElementSibling);
+    </script>
+</body>
+</html>

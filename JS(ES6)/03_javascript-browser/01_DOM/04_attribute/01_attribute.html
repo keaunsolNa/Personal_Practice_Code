@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_attribute</title>
+</head>
+<body>
+    <h1>01. 어트리뷰트</h1>
+
+    <label for="username">유저명</label>
+    <input type="text" id="username" value="user01">
+
+    <p>
+        getAttribute/setAttribute 메소드를 사용하면 프로퍼티를 통하지 않고 요소 노드에서 메소드를 통해
+        직접 HTML 어트리뷰트 값을 취득하거나 변경할 수 있다.
+    </p>
+
+    <script>
+        const $input = document.getElementById('username');
+
+        console.log($input.attributes);             // 요소의 어트리뷰트들이 담긴 프로퍼티
+
+        /* getAttribute를 통해 쉽게 요소의 어트리뷰트를 가져오거나 setAttribute를 통해 요소의 어트리뷰트를 수정할 수 있다. */
+        const inputValue = $input.getAttribute('value');
+        console.log(inputValue);
+
+        $input.setAttribute('value', 'user02');
+    </script>
+
+    <p>
+        hasAttribute(attributeName) 메소드를 사용하면 특정 HTML 어트리뷰트가 존재하는지 확인할 수 있다.
+        removeAttribute(attributeName) 메소드를 사용하면 특정 HTML 어트리뷰트를 삭제할 수 있다.
+    </p>
+
+    <label for="nickname">닉네임</label>
+    <input type="text" id="nickname" value="JSMaster">
+
+    <script>
+        const $nickname = document.getElementById('nickname');
+
+        /* 해당 요소가 어트리뷰트를 가지고 있는지 확인 */
+        console.log($nickname.hasAttribute('name'));            // false
+
+        console.log($nickname.hasAttribute('value'));           // true
+
+        /* value라는 어트리뷰트를 가지고 있다면 해당 value 어트리뷰트 삭제 */
+        if($nickname.hasAttribute('value')){
+            $nickname.removeAttribute('value');
+        }
+
+        /* value 어트리뷰트 삭제 후 확인 */
+        console.log($nickname.hasAttribute('value'));           // false
+    </script>
+
+
+</body>
+</html>

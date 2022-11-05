@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .area{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            border-radius: 50%;
+        }
+
+        .lightgray {background: lightgray;}
+        .yellow {background: yellow;}
+    </style>
+    <title>02_className-classList</title>
+    <p>
+        className의 경우는 하나의 클래스 어트리뷰트 값으로 덮어씌울 때 쓰고,
+        복수의 클래스 어트리뷰트 값을 추가 및 제거 하기 위해서는 classList를 활용해 DOMTokenList 타입의 객체에서
+        제공하는 메소드를 활용해야 한다.
+    </p>
+</head>
+<body>
+    <h1>02_className-classList</h1>
+
+    <div class="area"></div>
+
+    <script>
+        const $area = document.querySelector('.area');
+
+        /* 클래스명 덮어쓰기 */
+        // $area.className = 'circle';     // 프로퍼티 className을 통해 class 어트리뷰트값 수정( area -> circle)
+
+        console.log($area.classList);     // 요소가 가진 class 어트리뷰트 값을 DOMTokenList 타입의 객체로 반환
+
+        /* classList(DOMTokenList타입의 객체)에서 제공하는 add(...className)으로 class 어트리뷰트 값을 추가할 수 있다. */
+        $area.classList.add('lightgray');
+        $area.classList.add('circle');
+
+        /* classList에서 제공하는 remove(...className)으로 class 어트리뷰트 값을 제거할 수 있다. */
+        // $area.classList.remove('circle');
+
+        /* 해당 요소의 클래스 어트리뷰트 값을 하나씩 접근할 수 있다. */
+        console.log($area.classList[0]);
+        console.log($area.classList[1]);
+        console.log($area.classList[2]);
+
+        /* contain(className)은 인수로 전달된 문자열과 일치하는 클래스가 class 어트리뷰트 값으로 포함되어 있는지 확인한다.*/
+        console.log($area.classList.contains('circle'));        // true
+        console.log($area.classList.contains('yellow'));        // false
+
+        /* replace(oldClassName, newClassName)는 첫 번째 인수로 전달된 문자열을 두 번째 인수로 전달한 문자열로 변경한다. */
+        $area.classList.replace('lightgray', 'yellow');
+
+        /* toggle(className)은 class 어트리뷰트에 인수로 전달한 문자열과 일치하는 클래스가 존재하면 제거하고 존재하지 않으면 추가한다. */
+        $area.classList.toggle('yellow');
+
+    </script>
+
+</body>
+</html>

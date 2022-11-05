@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. inline style</title>
+</head>
+<body>
+    <h1>01. inline style</h1>
+
+    <div style="color:white; border: 1px solid black;">AREA</div>
+    <script>
+        const $area = document.querySelector('div');
+
+        // console.log($area.getAttribute('style'));
+        console.log($area.style);                           // CSSStyleDeclaration 타입의 객체로 넘어온다.
+
+        /* 인라인 스타일 추가 */
+        /* 단위 지정이 필요한 프로퍼티의 값은 반드시 단위를 지정해야 한다. */
+        $area.style.width = '100px';
+        $area.style.height = '100px';
+
+        /* 
+            CSSStyleDeclaration 객체의 프로퍼티 : 케멀 케이스(낙타봉 표기법)
+            CSS 프로퍼티 : 케밥 표기법
+        */
+        $area.style.backgroundColor = 'lightgray';          // 마침표 표기법
+        $area.style['background-color'] = 'yellow';         // 대괄호 표기법
+    </script>
+</body>
+</html>

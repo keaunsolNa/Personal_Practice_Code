@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. child node</title>
+</head>
+<body>
+    <h1>01. 자식 노드 탐색</h1>
+
+    <h3>노드 탐색</h3>
+    <ol id="element">
+        <li>children: 자식 노드 중 요소 노드만 탐색하여 HTMLCollection에 담아 반환</li>
+        <li>firstElementChild: 첫 번째 자식 요소 노드 반환</li>
+        <li>lastElementChild: 마지막 자식 요소 노드 반환</li>
+    </ol>
+
+    <script>
+        const $element = document.getElementById('element');
+
+        /* HTMLCollection 타입으로 자손 요소 노드만 포함(텍스트 노드X) */
+        console.log($element.children);
+
+        /* 첫 번째 자식 요소 노드 탐색*/
+        console.log($element.firstElementChild);
+
+        /* 마지막 자식 요소 노드 탐색 */
+        console.log($element.lastElementChild);
+    </script>
+</body>
+</html>
