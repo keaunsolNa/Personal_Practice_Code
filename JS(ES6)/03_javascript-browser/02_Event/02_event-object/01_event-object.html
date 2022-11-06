@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_evnet-object</title>
+    <style>
+        .area {
+            width: 200px;
+            height: 200px;
+            background: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <h1>01. 이벤트 객체</h1>
+    <p>
+        이벤트 발생 시 이벤트에 관련한 다양한 정보를 가진 이벤트 객체가 동적으로 생성된다. 
+        생성된 이벤트 객체는 이벤트 핸들러의 첫 번째 인수로 전달된다. 
+    </p>
+    <h1 class="message">아무곳이나 클릭해보세요. 클릭한 좌표를 알려드리겠습니다.</h1>
+
+    <script>
+        const $msg = document.querySelector('.message');
+
+        /* 이벤트 핸들러로 사용 될 함수 */
+        /* 클릭 이벤트에 의해 생성된 이벤트 객체는 이벤트 핸들러의 첫번째 인수로 전달 된다. */
+        function showCoords(e){
+            // console.log("실행 되나?");
+            // console.log(e);
+            console.log(`clientX: ${e.clientX}, clientY: ${e.clientY}`);
+        }
+
+        $msg.onclick = showCoords;
+    </script>
+
+    <p>
+        이벤트 핸들러 등록을 어트리뷰트 방식으로 등록했다면 동적으로 생성되는 이벤트 객체를 활용하기 위해 반드시
+        event라는 이름의 인수를 넘겨 주어야 한다.
+    </p>
+    <div class="area" onclick="showDivCoords(event);">
+        이 영역 내부를 클릭해 보세요. 클릭한 좌표를 알려드리겠습니다.
+    </div>
+
+    <script>
+        const $area = document.querySelector('.area');
+
+        function showDivCoords(e){
+            // console.log(e);
+            console.log(`clientX: ${e.clientX}, clientY: ${e.clientY}`);
+        }
+    </script>
+</body>
+</html>

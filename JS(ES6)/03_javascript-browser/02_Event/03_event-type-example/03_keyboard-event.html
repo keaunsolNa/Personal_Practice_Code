@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_keyboard event</title>
+    <style>
+        .area{
+            background: lightgray;
+            border: 1px solid black;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>03. 키보드 이벤트</h1>
+    <h3>키보드 이벤트 종류</h3>
+    <ul>
+        <li>keydown</li>
+        <li>keyup</li>
+    </ul>
+
+    <h3>키보드 이벤트 테스트</h3>
+    <input type="text" placeholder="아무 키나 입력하세요">
+    <p>
+        event.key : 문자
+        event.copy : 물리적인 키 코드
+        Ex. 소문자 a를 입력하면 event.key = a event.code = KeyA
+        대문자 A를 입력하면 event.key = A event.code = KeyA
+    </p>
+    <div class="area"></div>
+    <script>
+        const $message = document.querySelector("input[type=text]");
+        const $area = document.querySelector(".area");
+
+        $message.onkeydown = (e) => {
+            $area.insertAdjacentHTML('beforeend', 'keydown key=' + e.key + ", code= " + e.code + "<br>");
+        };
+        $message.onkeyup = (e) => {
+            $area.insertAdjacentHTML('beforeend', 'keyup key=' + e.key + ", code= " + e.code + "<br>");
+        }
+
+    </script>
+</body>
+</html>

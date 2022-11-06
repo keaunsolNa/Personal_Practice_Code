@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_event-handler-property</title>
+</head>
+<body>
+    <h1>02. 이벤트 핸들러 프로퍼티 방식</h1>
+
+    <p>
+        DOM 노드 객체는 이벤트에 대응하는 이벤트 핸들러 프로퍼티를 가지고 있다. 
+        이벤트 핸들러 프로퍼티의 키는 이벤트 핸들러 어트리뷰트명과 동일하며(on 접두사 + 이벤트 타입)
+        이벤트 핸들러 프로퍼티에 함수를 바인딩(대입)하면 이벤트 핸들러가 동작한다.
+
+        이벤트 핸들러 어트리뷰트 방식과의 차이점은 프로퍼티 방식은 하나의 이벤트 핸들러만
+        바인딩 할 수 있다는 단점이 있다는 점이다.
+    </p>
+    <button id="btn">클릭해보세요</button>
+    <script>
+        const $button = document.getElementById('btn');
+
+        // $button.onclick = function(){
+        //     alert('DOM 프로퍼티 방식으로 이벤트 핸들러 등록 완료!');
+        // }
+
+        $button.onclick = () => alert('DOM 프로퍼티 방식으로 이벤트 핸들러 등록 완료!');
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_event-handler-attribute</title>
+</head>
+<body>
+    <h1>01.  이벤트 핸들러 어트리뷰트</h1>
+
+    <h3>이벤트 핸들러 등록</h3>
+    <p>
+        이벤트 핸들러는 이벤트가 발생했을 때 브라우저에 호출을 위임한 함수
+        이벤트가 발생 했을 때 브라우저에게 이벤트 핸들러의 호출을 위임하는 것을 이벤트 핸들러 등록이라고 하며,
+        이벤트 핸들러를 등록하는 방법은 3가지 이다.
+    </p>
+
+    <h3>1. 이벤트 핸들러 어트리뷰트 방식</h3>
+    <p>
+        HTML 이벤트 핸들러 어트리뷰트(on 접두사 + 이벤트 타입) 값으로 함수 호출문을 할당하여 이벤트 핸들러를 등록하는 방식이다.
+        주의할 점은 함수 참조가 아닌 함수 호출문(소괄호까지 작성)을 할당한다는 점이다.
+    </p>
+
+    <button onclick="console.log('클릭했네?'); alert('클릭했네?');">클릭해보세요</button>
+    <button onmouseover="hello('수강생')">마우스를 올려보세요</button>
+    <button onclick="(() => {console.log('test');})()">클릭해 보세요</button>
+
+    <script>
+        function hello(name){
+            alert(`${name}씨, 마우스 올리지 마세요!`);
+        }
+    </script>
+</body>
+</html>

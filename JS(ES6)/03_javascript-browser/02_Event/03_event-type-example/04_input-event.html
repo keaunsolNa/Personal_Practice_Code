@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04_input event</title>
+    <style>
+        .lightgray { background: lightgray;}
+        .focused { outline: 3px dashed yellow;}
+    </style>
+</head>
+<body>
+    <h1>04. 사용자 입력 양식 이벤트</h1>
+
+    <form name="memberjoin">
+
+        <label for="username">이름</label>
+        <input type="text" name="username" id="username1" value="홍길동">
+
+        <br><br>
+
+        <label>성별</label>
+        <input type="radio" name="gender" id="male" value="m" checked><label for="male">남자</label>
+        <input type="radio" name="gender" id="female" value="f"><label for="female">여자</label>
+
+        <br><br>
+
+        <label>나이</label>
+        <select id="age" name="age1">
+            <option value="10">10대 이하</option>
+            <option value="20">20대</option>
+            <option value="30">30대</option>
+            <option value="40">40대</option>
+            <option value="50">50대</option>
+            <option value="60">60대 이상</option>
+        </select>
+
+        <br><br>
+
+        <label>자기소개</label>
+        <textarea name="introduce" id="introduce" rows="5" cols="30"
+        style="resize: none;">저를 소개합니다!</textarea>
+        <p id="limit"><span>0</span>/500자</p>
+
+        <br><br>
+
+        <input type="submit" value="제출">
+    </form>
+
+    <h3>폼 요소 값 다루기</h3>
+    <p>
+        input, textarea : input.vale 또는 input.checked(checkbox 또는 radio)
+        select.option : option 하위 요소들을 담고 있는 컬렉션
+        select.value : 현재 선택 된 option의 값
+        select.selectedIndex : 현재 선택 된 option의 번호(인덱스)
+    </p>
+
+    <script>
+        // 폼 취득
+        /* 폼 태그 및 폼 태그 안에 있는 값(요소)들은 인덱스 또는 id, name으로 선택할 수 있게 다양한 선택자가 존재한다. */
+        // 문서 내 모든 form들을 HTMLCollection 타입으로 반환
+        // console.log(document.forms);
+        // console.log(document.forms.memberjoin);                     // name 속성 값
+        // console.log(document.forms[0]);                             // index 값
+        const $form = document.forms.memberjoin;
+        
+        // 요소 취득
+        // form 내 사용자 입력 양식을 HTMLFormControlsCollection 타입으로 반환
+        // console.log($form.elements);                                // id 또는 class 어트리뷰트 이름으로 구성 됨
+        // console.log($from.elements.username == $form.username);     // $form.username과 같다.
+
+        /* name 또는 class 어트리뷰트명 */
+        const $username = $form.username;
+        // console.log(`$form.username.value : ${$username.value}`);
+        $username.value = '유관순';
+
+        const $gender = $form.gender;
+        // console.log(`$form.gender[1].checked : ${$gender[1].checked}`);
+        $gender[1].checked = true;
+
+        /* select 태그의 특징들 */
+        const $age = $form.age;
+        // console.log($age.options);                                  // HTMLOptionsCollection 타입의 option 태그들
+        $age.options[2].selected = true;
+        age.selectedIndex = 3;                                      // id가 'age'인 것으로 바로 요소 선택, 인덱스로 3번 인덱스(4번째 요소 선택)
+        age.value = '50';                                           // value가 50이 되게 설정
+
+        /* textarea 태그의 특징들 */
+        const $introduce = $form.introduce;
+        // console.log($introduce.vale);
+        $introduce.value = 'value';
+        $introduce.textContent = 'textContent';                     
+        /*
+            시작태그와 종료태그가 있지만 text node를 수정하기 위한 textContent 프로퍼티로는 수정할 수 없다. 
+            종료태그가 없는 input 태그처럼 value 프로퍼티를 수정해야 들어있는 값이 변경된다.
+        */
+    </script>
+
+    <h3>focus, blur 이벤트</h3>
+    <p>
+        focus : 사용자가 폼 요소를 클릭하거나 tab 키를 눌러 요소로 이동 했을 때 발생하는 이벤트
+        blur : 사용자가 다른 곳을 클릭허거나 tab 키를 눌러 다음 폼 필드로 이동했을 때 발생하는 이벤트
+        또한, focus, blur 메소드로 요소에 포커스를 주거나 제거할 수 있다.
+    </p>
+
+    <script>
+        $username.onfocus = (e) => {
+            e.target.classList.toggle('lightgray');
+        };
+
+        $username.onblur = (e) => {
+            e.target.classList.toggle('lightgray');
+        };
+    </script>
+
+    <h3>focusin, focusout 이벤트</h3>
+
+    <p>
+        focus 이벤트는 해당 입력 필드에서만 동작하고 버블링 되지 않는다. 
+        버블링이 필요하다면 focusin, focusout 이벤트를 사용한다.
+        생성 된 이벤트 객체는 이벤트를 발생 시킨 DOM 요소 이벤트 타깃(event target)을 중심으로
+        DOM 트리를 통해 전파된다.
+        1. 캡처링 단계(capturing phase) : 이벤트가 상위 요소에서 하위 요소 방향으로 전파
+        2. 타깃 단계(target phase) : 이벤트가 이벤트 타깃에 도달 
+        3. 버블링 단계(bubbling phase) : 이벤트가 하위 요소에서 상위 요소 방향으로 전파
+    </p>
+    <script>
+        $form.addEventListener('focus', (e) => e.target.classList.add('focused'));
+        $form.addEventListener('blur', (e) => e.target.classList.remove('focused'));
+
+        /* form 태그의 하위 요소에서 이벤트가 발생해도 상위 요소인 form 태그에 단 이벤트 핸들러가 동작한다.(버블링) */
+        $form.addEventListener('focusin', (e) => {
+            console.log(e.target);
+            e.target.classList.add('focused')
+        });
+        $form.addEventListener('focusout', (e) => e.target.classList.remove('focused'));
+    </script>
+
+    <h3>change 이벤트</h3>
+    <p>
+        change 이벤트는 요소 변경이 끝나면 발생하는 이벤트다. 
+        select/checkbox/radio의 경우 선택 값이 변경 된 직후 이벤트가 발생하지만
+        텍스트 입력 요소인 경우 변경 후 포커스를 잃었을 때 이벤트가 발생한다.
+    </p>
+    <script>
+        $username.addEventListener('change', () => alert('username change!'));              // input type = "text"
+        $age.addEventListener('change', () => alert('age change!'));
+        $introduce.addEventListener('change', () => alert('introduce change!'));            // textarea
+    </script>
+
+    <h3>input 이벤트</h3>
+    <p>
+        input 이벤트는 키보드 이벤트와 달리 어떤 방법으로든 값을 변경할 때 발생한다. 
+        예를 들어 마우스를 사용하여 글자를 붙여 넣거나 음성 인식 기능을 사용해서 글자를 입력할 때도 반응한다.
+    </p>
+
+    <script>
+        $introduce.addEventListener('input', (e) => {
+            let len = e.target.value.trim().length;
+            $form.querySelector('span').textContent = len;
+            console.log(len)
+            if(len >= 500) document.getElementById('limit').style.color = 'red';
+            else document.getElementById('limit').style.color = 'black';
+        });
+    </script>
+</body>
+</html>

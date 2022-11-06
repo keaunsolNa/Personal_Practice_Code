@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03. screen</title>
+</head>
+<body>
+    <h1>03. screen</h1>
+    <p>
+        screen 객체는 웹 브라우저 화면이 아닌 운영체제 화면의 속성을 가지는 객체이다. 
+        screen.width, screen.height는 화면 너비와 높이를 나타내지만 
+        screen.availwWidth, screen.availHeight는 실제 화면에서 사용 가능한(상태 표시줄 등을 제외한) 너비와 높이를 의미한다. 
+        screen.colorDepth는 사용 가능한 색상 수, screen.pixelDepth는 한 픽셀 당 비트 수를 의미한다.
+    </p>
+
+    <script>
+        for(prop in screen) {
+            console.log(`${prop} : ${screen[prop]}`);
+        }
+    </script>
+</body>
+</html>

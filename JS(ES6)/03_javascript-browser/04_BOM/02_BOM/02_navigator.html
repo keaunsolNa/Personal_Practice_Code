@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. navigator</title>
+</head>
+<body>
+    <h1>02. navigator</h1>
+
+    <p>
+        navigator 객체는 브라우저와 운영체제에 대한 정보를 제공한다. 
+        객체엔 다양한 프로퍼티가 있는데, 가장 잘 알려진 프로퍼티는 현재 사용 중인 브라우저의 정보를 알려주는 navigaotr.userAgent와 브라우저가 실행 중인 운영체제(window, Linux, mAx 등) 정보를 알려주는 navigator.platform이 있다.
+    </p>
+
+    <script>
+        for(prop in navigator){
+            console.log(`${prop} : ${navigator[prop]}`);
+        }
+
+        console.log(navigator.userAgent);               // 실제로는 "Mozilla/version" 기반이 아니었지만 다른 브라우저 벤더들은 자사 제품이 Netscape 브라우저의 특정 버전과 호환된다는 의미로 사용된다.
+        console.log(navigator.platform);
+    </script>
+</body>
+</html>
