@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        이벤트 처리는 뒤에서 다시 다룰 예정이지만, JSX에서 이벤트 속성을 표현식으로 연결하여 사용할 수 있다는 것을 간단히 살펴보자.
+    -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        /* 1. 인라인으로 간단한 이벤트 적용 시 JSX의 자바스크립트 표현식 내에 이벤트 핸들러 함수(이벤트 처리 함수) 작성 */
+        // const element = (
+        //     <>
+        //         <h1>Event Attribute</h1>
+        //         <button onClick={() => alert(`Hello World!`)}> 클릭하세요</button>
+        //     </>
+        // );
+
+        /* 2. 이벤트 동작 시 사용할 이벤트 핸들러 사전 정의 후 JSX 내에 표현식으로 사용 */
+        const onClickHandler = () => {
+            alert(`Hello world!`);
+        };
+
+        const element = (
+            <>
+                <h1>Event Attribute</h1>
+                <button onClick={onClickHandler}> 클릭하세요</button>
+            </>
+        );
+
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+    </script>
+</body>
+</html>

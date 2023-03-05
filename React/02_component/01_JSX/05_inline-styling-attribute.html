@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        /* 
+            케밥 표기법을 캐멀 케이스로 작성해야 한다. 
+            속성 값은 문자열 혹은 숫자 형태로 작성해야 한다. (객체를 사용하면 안 된다.)
+        */
+        const style = {
+            backgroundColor : 'black',
+            color : 'white',
+            cursor : 'pointer',
+            textAlign : 'center',
+            paddin: 20                      // 단위를 작성하려면 문자열로 사용하지만 단위를 생략하면 숫자만 사용 가능(생략 시 px를 붙인다.)
+        }
+
+        const element = (
+            <>
+                <h1 style={style}>Hello World!</h1>
+                <h3>inline styling test</h3>
+            </>
+        );
+
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+    </script>
+</body>
+</html>

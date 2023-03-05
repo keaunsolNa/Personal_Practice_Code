@@ -12,6 +12,13 @@
     <div id="root"></div>    
 
     <script>
+
+        /*
+            엘리먼트 : 요소 노드, 어트리뷰트 노드, 텍스트 노드로 만들어지는 가상 DOM 개념
+            컴포넌트 : 엘리먼트를 반환하는 개념을 가진 화면의 구성 단위
+        */
+
+        /* 클래스형 컴포넌트 */
         /* ES6에 클래스 문법이 도입되면서 리엑트에도 리엑트 컴포넌트를 만드는 새로운 방법이 도입되었다. */
         class HelloWorld extends React.Component {
             render(){
@@ -23,6 +30,20 @@
             }
         }
 
+        /* 함수형 컴포넌트 */
+        function HelloWorld() {
+            return React.createElement('h1', {className: 'greeting', id : 'test'}, 'Hello world');
+        }
+
+        /*
+            현재에도 여전히 class 구문을 사용해 리엑트 컴포넌트를 만들 수 있지만
+            함수 기반의 컴포넌트를 생성하는 방법이 리엑트 16이후 추가되었다.
+            현재는 함수 기반의 컴포넌트 생성 방법이 주를 이루고 있다. 
+
+            이제부터는 함수 기반의 컴포넌트 생성을 주로 사용하지만 생명주기 메소드와 훅스(hooks) 설명 시
+            클래스 문법은 다시 나올 것이다.
+        */
+       
         ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(HelloWorld));
     </script>
 

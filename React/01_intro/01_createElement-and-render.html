@@ -26,13 +26,25 @@
             리엑트 엘리먼트는 단지 리엑트에게 DOM 엘리먼트를 구성하는 방법을 알려주는 자바스크립트의 객체에 불과하다.
             (실제 DOM이 아닌 가상 DOM의 개념)
         */
-        const greetingElement = React.createElement('h1', {id: 'greeting'}, 'hello world!!');
+
+        /* 
+            주의 사항 : 엘리먼트 생성 시 어트리뷰트 노드에 해당하는 곳은 객체를 인수로 던져야 하고
+            class 어트리뷰트에 해당하는 값은 className이라는 프로퍼티 키를 써야 한다.
+        */
+        const greetingElement = React.createElement('h1', {className: 'greeting', id: 'greeting'}, 'hello world!!');
+        const textElement = React.createElement('h3', {id : 'name'}, '안녕하세요. 홍길동입니다.' );
 
         // const domContainer = document.getElementById('root');
         // const root = ReactDOM.createRoot(domContainer);
         // root.render(greetingElement);
 
-        ReactDOM.createRoot(document.getElementById('root')).render(greetingElement);
+        /* 
+            React 16버전 이전의 리엑트는 한 엘리먼트만 렌더링 할 수 있었지만,
+            이후 버전에서는 배열을 랜더링 할 수도 있다. 
+        */
+
+        // ReactDOM.render(greetingElement, document.getElementById('root'));   17버전 이전에 다수 엘리먼트 렌더링 방법
+        ReactDOM.createRoot(document.getElementById('root')).render([greetingElement, textElement]);
     </script>
 
 </body>

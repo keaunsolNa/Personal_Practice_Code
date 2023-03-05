@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        /*
+            인라인 스타일 시트 방식에서는 범위 주석만 가능하다.
+        */
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <!--
+        JSX 내에서의 주석을 작성하는 방법은 일반적인 자바스크립트의 주석을 작성할 때와는 조금 다르다.
+        (추가적으로 프론트에선 들여쓰기는 일반적으로 두칸 들여쓰기를 한다.)
+
+    -->
+    <!--
+        HTML에서의 주석
+    -->
+    <script type="text/babel">
+        /*
+            javascript 여러 줄 주석
+        */
+
+        // javascript 한 줄 주석
+       
+        const element = (
+            <>
+                <h1>Comment In JSX</h1>
+                {/* JSX 내에서의 주석은 이렇게 작성한다. */}
+                {
+                    // JSX 내에서의 한 줄주석은 표현식을 한줄이 아닌 여러 줄로 작성하면 적용할 수 있다.
+                }
+                <h3 
+                    className="text" // 시작 태그에도 주석을 작성할 수 있다.
+                >
+                    JSX 내의 주석 사용하는 방법
+                    {
+                        // 한 줄 주석
+                    }
+                </h3>   {/* 닫기 태그는 태그 내부에 주석을 일반적으로 하지 않는다. */}
+                /* 이런 주석이나 */
+                // 이런 주석은 그대로 화면에 나타나게 된다.
+            </>
+        );
+
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        let root = ReactDOM.createRoot(document.getElementById('root'));
+
+        function tick() {
+            const element = (
+                <>
+                    <h1>What time is it now?</h1>
+                    <h3>It is {new Date().toLocaleTimeString()}</h3>
+                </>
+            );
+
+            root.render(element);       // 최초 생성 시에는 가상 DOM의 태그들을 실제 DOM Tree에 Rendering 한다. 이후에는 가상 DOM과 실제 DOM Tree를 비교(diff)하여, 다른 점만 새로 Rendering한다.  
+        }
+
+        setInterval(tick, 1000);
+    </script>
+</body>
+</html>

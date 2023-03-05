@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- JSX 문법 내에 중괄호를 이용하여 모든 javascript 표현식(문법)을 넣을 수 있다. -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        function formatName(user) {
+            return `${user.lastName} ${user.firstName}`;
+        }
+
+        const user = {
+            firstName : 'Gildong',
+            lastName : 'Hong'
+        };
+
+        const element = <h1>Hello, {formatName(user)}</h1>;
+
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+
+    </script>
+</body>
+</html>

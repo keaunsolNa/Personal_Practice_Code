@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        이 안에 들어가는 모든 엘리먼트를 ReactDOM에서 관리하기 때문에 이것을 루트(root) DOM 혹은 루트 Node라고 부른다.
+        일반적으로 React로 구현된 애플리케이션은 하나의 루트 DOM이 있다.
+        단, 리액트를 기존 앱에 통합하려는 경우 원하는 만큼의 독립된 루트 DOM노드를 가질 수도 있다.
+    -->
+    <div id="root" style="height: 100px;"></div>
+
+    <script type="text/babel">
+        const element = (
+            <>
+                <h1>What time is it now?</h1>
+                <h3>It is {new Date().toLocaleTimeString()}</h3>
+            </>
+        );
+
+        /* React Element를 루트 DOM 노드에 랜더링 하려면 ReactDOM.createRoot(루트 DOM노드).render(랜더링 할 엘리먼트)로 전달하면 된다. */
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+    </script>
+</body>
+</html>
