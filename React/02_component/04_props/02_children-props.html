@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+        자식 노드를 전달하는 props.children
+        리액트 컴포넌트를 사용할 때 태그 사이의 내용을 props의 children 속성에서 관리한다.
+    -->
+    <div id="root" style="height: 100px;"></div>
+
+    <script type="text/babel">
+        function ChildNodePrinter(props){
+            console.log(props);
+
+            return (
+
+                <>
+                    <h1>자식 노드가 가지고 있는 값은?</h1>
+                    <h3>children:<font style={{color: 'orangered'}}>{props.children}</font> </h3>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(
+            [
+                <ChildNodePrinter>텍스트 노드</ChildNodePrinter>,
+                <ChildNodePrinter><div>텍스트 노드</div></ChildNodePrinter>,
+                <ChildNodePrinter><div>1</div><div>2</div><div>3</div></ChildNodePrinter>
+            ]
+        );
+    </script>
+</body>
+</html>
