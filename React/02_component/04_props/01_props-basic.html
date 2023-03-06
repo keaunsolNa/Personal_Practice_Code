@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        props란?
+        properties의 약어로, 컴포넌트의 속성을 설정할 때 사용하는 요소이다. 
+        props 값은 해당 컴포넌트를 사용하는 부모 컴포넌트에서 설정할 수 있다. 
+        (부모 컴포넌트가 없어도 props 재료를 컴포넌트에 줄 수 있다.)
+        props는 읽기 전용 객체이기 때문에 수정해서는 안된다. 
+
+        리액트는 매우 유연하게 사용하지만 한 가지 엄격한 규칙이 있다. 
+        "모든 React 컴포넌트는 자신의 props를 다룰 때 반드시 순수 함수처럼 동작해야 한다."
+
+        동일한 입력값에 대해 동일한 결과를 반환하는 것을 순수 함수라고 하며, 컴포넌트는 반드시 이러한
+        순수 함수처럼 작성 되어야 한다. 
+    -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const name1 = '홍길동';
+        const name2 = '유관순';
+
+        /* 컴포넌트 호출 시 props를 넘기지 않으면 props는 빈 객체가 생성된다. */
+        function Title(props){
+            return <h1>안녕하세요 {props.name}님 반갑습니다. </h1>;
+        }
+
+        /* props.name이 존재하지 않는 경우 기본값 설정 */
+        Title.defaultProps = {
+            name: '기본이름'
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(
+        [
+
+            <Title name={name1}/>,
+            <Title name={name2}/>,
+            <Title name='이순신'/>,
+            <Title/>                    
+
+        ]    
+        
+        );
+    </script>
+</body>
+</html>

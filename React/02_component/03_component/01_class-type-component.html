@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        /*
+            클래스형 컴포넌트
+            ES6에서 제공되는 클래스 문법을 이용해 렌더링 될 컴포넌트를 정의하는 방법을 제공한다. 
+            render() 함수는 반드시 작성되어야 하며, 반환값으로는 렌더링 될 리액트 엘리먼트를 정의한다. 
+            (일반적으로 JSX 사용함)
+            JSX만으로도 리액트 엘리먼트를 정의할 수 있지만 클래스형으로 컴포넌트를 작성하게 되면 여러가지 장점이 있다. 
+            중복되는 엘리먼트를 추상화해서 컴포넌트로 작성하고, 작성된 컴포넌트를 재사용하는 것이 리액트가 추구하는 한 가지 방향이다. 
+
+            컴포넌트를 정의하는 방법은 현재 두 가지 방식을 제공한다. 
+            클래스형 컴포넌트와 함수형 컴포넌트이다. 
+            사용하는 것은 함수형 컴포넌트가 더 간결하고 선언하기도 편하며, 메모리도 덜 사용하기에 더 권장되는 방식이다. 
+            하지만 state 사용 및 라이프 사이클 기능, 임의의 메소드 정의 등은 클래스 컴포넌트에서만 사용 가능한 방식이다. 
+            이러한 함수형 컴포넌트의 기능적 한계로 훅스(hooks)를 제공하고 있으며, 이 부분은 뒤에서 다루게 된다. 
+
+            리액트 팀은 함수형 컴포넌트 사용을 권장하지만 클래스형 컴포넌트를 없애기보단 계속 유지하는 방향을 선택했다고 한다.
+        */
+        class Title extends React.Component {
+            render() {
+                return (
+                    <h1>Class Component</h1>
+                );
+            }
+        } 
+
+        /* 클래스형 컴포넌트를 만들게 되면 사용자 정의 컴포넌트를 엘리먼트 형태로 사용할 수 있다.(사용자 정의 태그처럼) */
+        ReactDOM.createRoot(document.getElementById('root')).render(<Title/>);      // 1. 앞글자 대문자, 2. 닫기 태그 존재, 3. 클래스나 함수 이름과 동일해야 한다.
+    </script>
+</body>
+</html>

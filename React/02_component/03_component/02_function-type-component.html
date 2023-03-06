@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="root" style="height: 100px;"></div>
+
+    <script type="text/babel">
+
+        /*
+            함수형 컴포넌트
+            함수형 컴포넌트는 간결하게 작성 가능하다. 
+            함수의 반환값으로 ReactElement만 정의해서 반환하면 된다. (일반적으로 JSX 사용)
+            함수형 컴포넌트 작성 시 유의사항은 앞 글자를 대문자로 정의해야 한다는 것이다. 
+            사용자 정의 엘리먼트를 이용할 시 <Title/> 이런형태로 사용하게 되는데, 앞 글자가 소문자이면 html로
+            인식하게 되고 존재하지 않는 html 태그 엘리먼트이기 때문에 제대로 그려지지 않는다. 
+            함수형 컴포넌트의 단점은 state와 라이프사이클 API 사용이 불가능하다는 것이었는데 v16.8부터 hooks를
+            제공하며 이 문제가 해결되었다. 
+        */
+        function Title(){
+            return( 
+                <h1>Function Component</h1>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Title/>);
+    </script>
+</body>
+</html>
