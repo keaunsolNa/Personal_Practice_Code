@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        함수형 컴포넌트는 기본적으로 state를 사용할 수 없었다. 하지만 리액트 16.8버전 이후 useState라는 함수를 이용하여
+        함수 컴포넌트에서도 state를 관리하고 사용할 수 있게 되었다. 
+
+        앞으로는 useState를 사용할 것을 더 권장한다. 리액트 개발 팀이 함수 컴포넌트와 hooks를 사용하는 것이
+        향후 컴포넌트의 주요 개발 방식이 될 것이라고 공지했기 때문이다.
+    -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        /* 
+            useState는 React 객체에서 내부에 존재하는 함수형 속성이다. 
+            따라서 React.useState() 형태로 호출해서 사용해야 한다. 
+            하지만 구조분해 할당을 이용하여 미리 전역 변수로 선언해두고 나면
+            React.을 생략하고 useState()로 사용할 수 있다. 
+        */
+        const {useState} = React;       // React 제공 함수(hooks)
+        
+        function Say() {
+            // console.log(useState('기본값'))             // useState 함수는 함수형 컴포넌트 안에서 사용할 것, 반환형이 2칸짜리 배열이다.
+            // console.log('변경됐나?');                   // 각각의 state에 해당하는 setter메소드로 state를 수정할 때마다 함수형 컴포넌트가 다시 실행된다. (리렌더링)
+
+            /* message라는 상태(state)와 setter 메소드를 배열 구조 분해 할당으로 각각의 변수에 할당한다. */
+            const [message, setMessage] = useState('기본상태');
+
+            /* 여러 개의 상태들을 한 컴포넌트 내에서 사용해도 된다. */
+            const [color, setColor] = useState('black');
+            const [backgroundColor, setBackgroundColor] = useState('red');
+
+            const onClickEnter = () => [setMessage('안녕!'), setColor('white')];
+            const onClicLeave = () => [setMessage('잘가~'), setColor('black')];
+
+            return (
+                <>
+                    <h1 style={{color, backgroundColor}}>{message}</h1>
+                    <div>
+                        <button onClick={onClickEnter}>입장</button>    
+                        <button onClick={onClicLeave}>퇴장</button>    
+                    </div>
+                    <div>
+                        <button onClick = {() => setColor('red')}> 빨간색 </button>
+                        <button onClick = {() => setColor('purple')}> 보라색 </button>
+                        <button onClick = {() => setColor('green')}> 초록색 </button>
+                    </div>
+                    <div>
+                        <button onClick = {() => setBackgroundColor('white')}> 기본 배경 </button>
+                        <button onClick = {() => setBackgroundColor('black')}> 반전 배경 </button>
+                    </div>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Say/>);      
+    </script>
+</body>
+</html>
