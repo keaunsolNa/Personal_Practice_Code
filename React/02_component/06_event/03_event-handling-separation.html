@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+    <!--
+        성능적으로 별로 큰 차이는 없지만 가독성을 위해 컴포넌트 내부 함수로 이벤트 핸들러 메소드를 
+        분리한 후에 render 함수 안에서는 미리 선언된 함수를 사용하는 걸로 render 함수의 가독성을
+        향상시킬 수 있다. 
+        이벤트 핸들러에서 실행할 내용이 많을 수록 가독성은 더 좋아진다. 
+    -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        class EventComponent extends React.Component {
+            
+            state = {
+                message : ''
+            };
+
+            constructor(props){
+                super(props);
+
+                /* 
+                    함수가 호출될 때는 this는 호출부에 따라 결정되게 된다. (메소드 호출 대상에 따라 달라짐)
+                    클래스의 임의 메소드가 특정 HTML 요소의 이벤트 핸들러가 되는 순간
+                    메소드와 this의 관계가 끊어져 버린다. 
+                    이 때문에 임의 메소드가 이벤트로 등록 되어도 this가 컴포넌트 자신으로 제대로 가리키기 위해서는
+                    메소드를 constructor에서 말하는 (컴포넌트 자신) this와 바인딩 하는 작업이 필요하다. 
+                    만약 바인드 하지 않는다면 this는 undefined가 된다. 
+                */
+                this.onChangeHandler = this.onChangeHandler.bind(this);
+                this.onClickHandler = this.onClickHandler.bind(this);
+
+            }
+
+            onChangeHandler(e) {
+                this.setState({
+                    message : e.target.value
+                });
+            }
+
+            onClickHandler(e){
+                alert(this.state.message);
+
+                this.setState({
+                    message : ''
+                });
+            }
+            
+            render(){
+
+                return (
+                    <>
+                        <h1>이벤트 핸들링 - 핸들링 메소드 분리</h1>
+                        <input
+                            type="text"
+                            name="message"
+                            placeholder="텍스트를 입력"
+                            onChange={this.onChangeHandler}
+                            value={this.state.message}
+                        />
+                        <button onClick = {this.onClickHandler}>확인</button>
+                    </>
+                );
+            }
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<EventComponent/>);
+    </script>
+
+
+</body>
+</html>

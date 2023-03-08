@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+    <!-- 이벤트 핸들러로 등록할 메소드를 화살표 함수를 하면 자동 바인드가 이루어진다. -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        class EventComponent extends React.Component {
+            
+            state = {
+                message : ''
+            };
+
+            onChangeHandler = (e) => {
+                this.setState({
+                    message : e.target.value
+                });
+            }
+
+            onClickHandler = (e) => {
+                alert(this.state.message);
+
+                this.setState({
+                    message : ''
+                });
+            }
+            
+            render(){
+
+                return (
+                    <>
+                        <h1>이벤트 핸들링 - 화살표 함수를 활용한 핸들러 메소드 분리</h1>
+                        <input
+                            type="text"
+                            name="message"
+                            placeholder="텍스트를 입력"
+                            onChange={this.onChangeHandler}
+                            value={this.state.message}
+                        />
+                        <button onClick = {this.onClickHandler}>확인</button>
+                    </>
+                );
+            }
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<EventComponent/>);
+    </script>
+
+
+</body>
+</html>

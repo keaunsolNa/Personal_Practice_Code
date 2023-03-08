@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        class LoginComponent extends React.Component {
+
+            state = {
+                username:'1',
+                password:'2'
+            }
+
+            onChangeHandler = e => {
+                this.setState({
+                    username : e.target.value
+                });
+
+            }
+
+            onChangeHandler2 = e => {
+                this.setState({
+                    password : e.target.value
+                });
+
+            }
+
+            onClickHandler = e => {
+            }
+
+            render() {
+
+                return (
+                    <>
+                        <h1>로그인</h1>
+                        <label>아이디 : </label>
+                        <input 
+                            type="text"
+                            name="username"
+                            placeholder="아이디입력"
+                            value={this.state.username}
+                            onChange={this.onChangeHandler}
+                        />
+                        <br/>
+                        <label>비밀번호 : </label>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="비번입력"
+                            value={this.state.password}
+                            onChange={this.onChangeHandler2}
+                        />
+                        <br/>
+                        <button>로그인</button>
+                    </>
+                );
+            }
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<LoginComponent/>);   
+    </script>
+</body>
+</html>
