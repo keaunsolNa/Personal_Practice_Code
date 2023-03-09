@@ -14,28 +14,62 @@
 
     <script type="text/babel">
 
+        /* js의 spred 연산자 및 rest parameter 복습 */
+
+        /* spread 연산자로 객체 복사(부분 복사도 가능) */
+        let obj = {
+            prop0 : 'p0',
+            prop1 : 'p1',
+            prop2 : 'p2'
+        };
+
+        // 프로퍼티 키가 일치하지 않는 나머지만 spread 연산자를 활용해서 복사할 수도 있다.
+        let objCopy = {...obj, prop2: `modify`};    
+
+        console.log(obj)
+
+        /* 2. rest parameter */
+        let [a, ...rest] = [1, 2, 3];
+        console.log(rest);
+        let {prop1, ...restObj } = {prop1 : 'a', prop2: 'b', prop3: 'c'};
+        console.log(restObj);
+
+
         class LoginComponent extends React.Component {
 
             state = {
-                username:'1',
-                password:'2'
+                username:'',
+                password:''
             }
 
+            /* 각각의 핸들러 메소드가 처리할 상태 프로퍼티 키가 다르므로 따로 핸들러 메소드 작성 시 */
+            // onChangeHandler = e => {
+            //     this.setState({
+            //         username : e.target.value
+            //     });
+
+            // }
+
+            // onChangeHandler2 = e => {
+            //     this.setState({
+            //         password : e.target.value
+            //     });
+            // }
+
+            /* 이벤트가 발생한 input 태그의 name 속성 값을 활용하여 하나의 핸들러 메소드로 처리할 수 있다. */
             onChangeHandler = e => {
                 this.setState({
-                    username : e.target.value
-                });
-
-            }
-
-            onChangeHandler2 = e => {
-                this.setState({
-                    password : e.target.value
-                });
-
+                    [e.target.name] : e.target.value
+                });     // e.target.name에 대괄호를 씌우는 이유는 해당 변수 안에 있는 값을 프로퍼티 키로 적용하기 위함이다. 
             }
 
             onClickHandler = e => {
+                alert(`username: ${this.state.username} \n password: ${this.state.password}`);
+
+                this.setState({
+                    username :'',
+                    password : ''
+                });
             }
 
             render() {
@@ -58,10 +92,10 @@
                             name="password"
                             placeholder="비번입력"
                             value={this.state.password}
-                            onChange={this.onChangeHandler2}
+                            onChange={this.onChangeHandler}
                         />
                         <br/>
-                        <button>로그인</button>
+                        <button onClick={this.onClickHandler}>로그인</button>
                     </>
                 );
             }
