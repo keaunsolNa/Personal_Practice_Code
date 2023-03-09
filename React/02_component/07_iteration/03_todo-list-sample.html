@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .container {
+            background: skyblue;
+            width: 100%;
+            height: 100vh;      /* 1vh는 화면의 높이 1% */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            height: 100px;
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .content {
+            flex-grow: 1;
+            background: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .todo-list {
+            background: white;
+            width: 500px;
+            border: 1px solid black;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 50px;
+        }
+
+        .todo-list label {
+            margin: 20px;
+        }
+
+        .todo-list button {
+            border: none;
+            background: red;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .append-list button {
+            background: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            height: 30px;
+        }
+
+        .footer {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            background: black;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const { useState } = React;
+
+        function Header() {
+
+            return (
+                <div className="header">
+                    <h1>오늘의 할일! { new Date().toLocaleDateString() }</h1>    
+                </div>
+            );
+        }
+
+        function TodoItems({ todos, setTodos }) {
+
+            const removeTodo = (id) => {
+                const removedList = todos.filter(todo => todo.id !== id);
+                
+                setTodos(removedList);
+            }
+
+            const onChangeHandler = (e) => {
+                const changeIsDoneList = todos.map(
+                    (todo) => {
+                        if(todo.id === parseInt(e.target.id)) {
+                            todo.isDone = e.target.checked;
+                        }
+
+                        return todo;
+                    }
+                );
+
+                setTodos(changeIsDoneList);
+            }
+            
+            return (
+                <>
+                    { 
+                        todos.map(
+                            todo => 
+                                <p key={ todo.id }>
+                                    <input 
+                                        type="checkbox" 
+                                        id={ todo.id } 
+                                        onChange={ onChangeHandler }
+                                    />
+                                    <label 
+                                        htmlFor={ todo.id } 
+                                        style={ {textDecoration: todo.isDone? 'line-through': 'none'} }
+                                    >
+                                        { todo.description }
+                                    </label>
+                                    <button onClick={ () => removeTodo(todo.id) }>x</button>
+                                </p>
+                        ) 
+                    }
+                </>
+            );
+        }
+
+        function TodoList() {
+
+            const [todos, setTodos] = useState([
+                {id: 1, description: '할일 목록을 추가할 것', isDone: false}
+            ]); 
+            const [inputText, setInputText] = useState('');
+            const [nextId, setNextId] = useState(2);
+
+            const onChangeHandler = (e) => {
+                setInputText(e.target.value);
+            }
+
+            const onClickHandler = () => {
+                const changeTodos = todos.concat({
+                    id: nextId,
+                    description: inputText,
+                    inDone: false
+                });
+
+                console.log(changeTodos)
+                setInputText('');
+                setNextId(nextId + 1);
+                setTodos(changeTodos);
+            }
+
+            return (
+                <>
+                    <h3>ToDo-List</h3>
+                    <div className="todo-list">
+                        <TodoItems 
+                            todos={ todos } 
+                            setTodos={ setTodos }
+                        />
+                    </div>
+                    <div className="append-list">
+                        <input 
+                            type="text" 
+                            value={ inputText } 
+                            onChange={ onChangeHandler }
+                        />
+                        <button onClick={ onClickHandler }>추가하기</button>
+                    </div>
+                </>
+            );
+        }
+
+        function Content() {
+
+            return (
+                <div className="content">
+                    <TodoList/>
+                </div>
+            );
+        }
+
+        function Footer() {
+
+            return (
+                <div className="footer">
+                    <p>Copyright 2022. team-greedy all rights reserved.</p>
+                </div>
+            );
+        }
+
+        function TodoApp() {
+
+            return (
+                <div className="container">
+                    <Header/>
+                    <Content/>
+                    <Footer/>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<TodoApp/>);
+    </script>
+</body>
+</html>
