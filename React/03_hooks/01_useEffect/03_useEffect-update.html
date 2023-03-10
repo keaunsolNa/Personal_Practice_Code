@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+    <!--
+        마운트 시점 뿐 아니라 특정 값이 업데이트 될 때만 실행하게 해보자. 
+    -->
+    <div id="root"></div>    
+
+    <script type="text/babel">
+
+        const {useState, useEffect} = React;
+        function LoginForm() {
+
+            const [user, setUser] = useState({
+                username : '',
+                password : ''
+            });
+
+            const onChangeHandler = (e) => {
+                setUser({
+                    ...user, 
+                    [e.target.name] : e.target.value
+                });
+            }
+
+            /*
+                useEffect는 기본적으로 마운트 시점에 동작하고 또한 원하는 값의 변경 시점에만 동작하게 각각 만들 수 있다. 
+                그 뿐 아니라 변화 감지 대상에 변화가 없으면 쓸데없이 동작하지 않는다. 
+            */
+            useEffect(
+                () => {console.log('username update...')},
+                [user.username]                 // 동작하기 전의 변경 전 값과 변경 후 값을 비교하여 일치하면 호출을 건너뛴다.
+            )
+
+            useEffect(
+                () => {console.log('password update...')},
+                [user.password]
+            )
+
+
+            return(
+
+                <>
+                    <label>username: </label>
+                    <input type = "text" name="username" onChange={onChangeHandler}/>
+                    <br/>
+
+                    <label>password: </label>
+                    <input type = "password" name="password" onChange={onChangeHandler}/>
+                    <br/>
+
+                    <h3>username: {user.username} </h3>
+                    <h3>password: {user.password} </h3>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<LoginForm/>);
+    </script>
+</body>
+</html>
