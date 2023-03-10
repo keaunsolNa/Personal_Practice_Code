@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class ErrorBoundery extends React.Component {
+
+            state = {
+                hasError : false
+            };
+
+            /* 1. 자손 컴포넌트에서 오류가 발생했을 때 자동 호출되는 메소드 */
+            static getDerivedStateFromError(error) {
+
+                /*
+                    이 메소드는 매개변수로 오류를 전달 받고, 갱신된 state값을 반드시 반환해야 한다. 
+                    주의할 점은 render 단게에서 호출되기 때문에, 여기에서 부수적인 효과를 발생시키면 안된다. 
+                */
+                console.log('getDerivedStateFromError');
+
+                return {hasError: true};
+            }
+
+            /* 2. 자손 컴포넌트에서 오류가 발생했을 때 호출된다. */
+            componentDidCatch(error, info) {
+
+                /*
+                    error와 info 두 개의 매개변수를 전달 받는다. 
+                    error - 발생 오류
+                    info - 어떤 컴포넌트가 오류를 발생시켰는지에 대한 정보를 포함한 객체
+
+                    오류 로그들을 기록하는 특정 메소드를 호출한다거나 하는 일들을 처리할 수 있다. 
+
+                    주의 
+                    setState()를 호출하여 상태를 변경하여 역시나 에러 페이지를 렌더링 할 수 있다. 
+                    하지만 이 방식은 개발환경에서는 가능하지만 이후 릴리즈(향후 버전)에서는 사용할 수 없게 된다. 
+                    따라서 해당 메소드에서 setState를 호출하는 대신 getDerivedStateFromError 메소드에서 
+                    변경 될 state 객체를 반환하여 UI를 핸들링 하는 것이 더 좋다. 
+                */
+                console.log('componentDidCatch');
+                console.log({error, info});
+            }
+            render() {
+
+                if(this.state.hasError) {
+                    return (
+                        <>
+                            <h1> 에러가 발생했습니다. </h1>
+                            <h3> 내 코드에서 에러라니... </h3>
+                        </>
+                    )
+                }
+                return this.props.children;             // 별다른 엘리먼트 추가 없이 자식 컴포넌트를 내보내는 용도
+            }
+        }
+
+        class TimePrinter extends React.Component {
+
+            state = {
+                now : new Date().toLocaleTimeString()
+            };
+
+            render() {
+                return (
+                    <>
+                        <button
+                            onClick = {() => this.setState({now : new Date().toLocaleTimeString()})}
+                        >
+                            현재 시간 확인하기
+                        </button>
+                        <h1>{this.states.now}</h1>          {/* 에러 발생 상황을 만들기 위해 state -> states */}
+                    </>
+                );
+            }
+        }
+        
+        class App extends React.Component {
+            render() {
+                return (
+                    <ErrorBoundery>
+                        <TimePrinter/>
+                    </ErrorBoundery>
+                );
+            }
+        }
+        
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+
+</body>
+</html>

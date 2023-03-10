@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+    <!-- 
+        컴포넌트 업데이트 생명주기에 대한 업데이트 기준은 크게 4가지로 나뉜다. 
+        1. props 변경
+        2. state 변경
+        3. 부모 컴포넌트 리렌더링
+        4. this.forceUpdate로 강제 렌더링 트리거(render 내에서는 가급적 사용 자제.)
+
+        이 중 1 ~ 3의 경우 호출되는 생명주기 메소드는 동일하다. 
+        getDerivedStateFromProps -> shouldComponentUpdate -> render -> getSnapshotBeforeUpdate -> componentDidUpdate
+        순으로 호출된다. 
+        4의 경우는 바로 render 함수를 호출한다. 
+
+        state가 변경되는 상황으로 생명주기 메소드 호출 순서를 확인하는 예제를 살표보다. 
+    -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        class TimePrinter extends React.Component {
+
+            constructor(props) {
+
+                super(props);
+                this.state = {
+                    now: new Date().toLocaleTimeString()
+                };
+            }
+
+
+            /* 1. props에 있는 값을 state에 넣을 때 사용하는 메소드 */
+            static getDerivedStateFromProps(nextProps, nextState) {
+
+                /*
+                    리액트 16.3 이후에 새로 만든 라이프 사이클 메소드이다. 
+                    props로 받아온 값을 state에 동기화 시키는 용도로 사용하며, 마운트와 업데이트 시 호출된다. 
+                */
+                console.log('getDerivedStateFromProps')
+
+                console.log(nextProps);     // 리렌더링 시 변경된 props 값
+                console.log(nextState);     // 리렌더링 시 변경된 state 값
+                
+                /* 아래와 같은 조건문으로 인수들을 활용해 prop에 변화가 생기면 state에도 변화를 줄 수 있는 코드를 작성할 수도 있다. */
+                // if(nextProps.text !== nextState.prevProp) {
+                //     return {now: nextProps.text};
+                // }
+
+                return null;    // state에 변화를 주고 싶지 않다면 null을 반환
+            }
+
+            /* 2. 컴포넌트가 리렌더링을 할 것인지 말 것인지를 결정하는 메소드 (render() 메소드 호출 유무 결정) */
+            shouldComponentUpdate(nextProps, nextState) {
+
+                /*
+                    자주 사용되지는 않는 생명주기 메소드이다. 
+                    주로 성능 최적화를 목적으로 하며, 상황에 따라 리렌더링을 방지할 목적으로 사용한다. 
+                */
+                console.log('shouldComponentUpdate');
+
+                console.log(nextProps);     
+                console.log(nextState);
+
+                /* 반드시 boolean을 반환해야 하며, false를 반환할 경우 render부터 이후 생명주기 메소드 호출은 여기서 중단된다. */
+                return true;
+            }
+
+            /* 3. 컴포넌트를 렌더링 하는 메소드 */
+            render() {
+                console.log('render')
+
+                return (
+                    <> 
+                        <button
+                            onClick={() => this.setState({now: new Date().toLocaleTimeString()})}
+                        >
+                            현재 시간 확인하기
+                        </button>
+                        <h1>{this.state.now}</h1>
+                    </>
+                )
+            }
+
+            /* 4. 컴포넌트의 변화를 실제 DOM에 반영하기 직전에 호출하는 메소드 */
+            getSnapshotBeforeUpdate(prevProps, prevState) {
+
+                /*
+                    리액트 16.3 이후 만들어진 메소드이다. 
+                    render에서 만들어진 결과물이 브라우저에 실제 반영되기 직전에 호출되며, 
+                    해당 메소드의 반환값은 componentDidUpdate에서 전달받을 수 있다. 
+                    주로 업데이트 하기 직전의 값을 참고할 일이 있을 때 활용한다. (대표적으로 스크롤바 위치 유지)
+                */
+                console.log('getShnapshotBeforeUpdate');
+
+                // return null;
+
+                /* componentDidUpdate의 snapshot 인수 (3번째)로 전달 된다. */
+                return {
+                    message: '스냅샷'
+                }
+            }
+
+            /* 5. 컴포넌트 업데이트 작업이 끝난 후 호출하는 메소드 */
+            componentDidUpdate(prevProps, prevState, snapshot){
+
+                /*
+                    리렌더링이 끝나고 화면이 update 된 후 실행된다. 
+                    업데이트가 끝난 직후이기 때문에 DOM관련 처리를 해도 되며, 
+                    컴포넌트가 이전에 가졌던 데이터를 prevProps, prevState로 접근할 수 있다. 
+                    또한, getSnapshotBeforeUpdate에서 반환하는 값을 세 번째 파라미터로 전달 받을 수도 있다. 
+                */
+                console.log('componentDidUpdate')
+                console.log(snapshot);
+            }
+
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<TimePrinter/>);
+    </script>
+</body>
+</html>
