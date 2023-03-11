@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        /* useState 쓸 때(각자의 컴포넌트 안에서 state를 관리 (수정)할 시) */
+        // const {useState} = React;
+
+        // function Counter(){
+
+        //     const [state, setState] = useState({value : 0});
+
+        //     return(
+        //         <>
+        //             <h1>count : {state.value} </h1>
+        //             <button onClick = {() => {setState({value : state.value - 1})}}> - 1 </button>
+        //             <button onClick = {() => {setState({value : state.value + 1})}}> + 1 </button>
+        //         </>
+        //     )        
+        // }
+
+        /* useReducer(외부 함수(리듀서)에서 컴포넌트의 state를 action에 따라 관리) */
+        const {useReducer} = React;
+
+        function reducer(state, action) {
+
+            // console.log(state);
+            // console.log(action);
+
+            switch(action.type){
+                case 'DECREMENT' :
+
+                    return { value : state.value - 1};
+
+                case 'INCREMENT' :
+
+                    return { value : state.value + 1};
+
+                default : 
+                    return state;
+            }
+            return state;
+
+        }
+
+        /* 컴포넌트에서 직접 state를 수정(setState개념)을 하지 않는다. */
+        function Counter(){
+            console.log(useReducer(reducer, {value: 0}));
+            
+            const [state, dispatch] = useReducer(reducer, {value : 0});
+
+            return (
+                <>
+                    <h1>counter : {state.value}</h1>
+                    <button onClick = {() => dispatch({type : 'DECREMENT'})}>- 1</button>
+                    <button onClick = {() => dispatch({type : 'INCREMENT'})}> + 1 </button>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Counter/>);
+    </script>
+</body>
+</html>
