@@ -20,7 +20,20 @@
         function Timer() {
 
             useEffect(
-                () => {console.log('Timer 컴포넌트 마운트 될 때만 동작...')},
+                () => {
+
+                    // console.log('Timer 컴포넌트 마운트 될 때만 동작...')
+                    console.log('타이머 시작');
+                    const timer = setInterval(() => {
+                                    console.log(new Date().toLocaleTimeString());
+                                }, 1000);
+
+                    /* 함수를 반환하면 해당 컴포넌트를 언마운트 시 setInterval을 통해 Interval을 먼저 종료 시킨다. */
+                    return () => {
+                        clearInterval(timer);
+                        console.log('타이머가 종료됩니다...');
+                    }
+                },
                 []
             )
 
@@ -35,6 +48,7 @@
                 <>
                     <button onClick={() => {setIsTrue(!isTrue)}}> 타이머 토글 </button>
                     { isTrue && <Timer/>}
+                    {/* { isTrue ? <Timer/> : null} */}
                 </>
             )
         }
