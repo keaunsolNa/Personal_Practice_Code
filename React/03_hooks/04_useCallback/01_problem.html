@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const {useState, useEffect} = React;
+
+        function App() {
+            const [number, setNumber] = useState(0);
+            const [toggle, setToggle] = useState(false);
+
+            const printNumber = () => {
+                console.log('current number: ', number);        // console.log는 ,로 구분해서 로그들을 찍어낼 수 있다.
+            }
+    
+            /* 
+                number 또는 toggle state가 변경될 때 함수가 다시 생성되는 것은 불필요하다. 
+                하지만 매번 함수가 다시 생성되어 반환되고 useEffect에서는 해당 지역 변수에 변화가 있다고 인지하게 된다. 
+            */
+            useEffect(() => {
+                console.log('printNumber 값 변화')
+            }, [printNumber]);
+
+            return (
+                <>
+                    <input
+                        type="number"
+                        value={number}
+                        onChange={e => setNumber(e.target.value)}
+                    />
+
+                    <button onClick={() => setToggle(!toggle)}>{String(toggle)}</button> {/* boolean 값은 문자열로 바꿔야 JSX문법으로 화면에 표현된다. */}
+                    <br/>
+                    <button onClick={printNumber}>PrintNumberState</button>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+</body>
+</html>
