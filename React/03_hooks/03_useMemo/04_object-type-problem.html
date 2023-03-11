@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!--
+       useMemo는 state의 값에 따라 저장한 값을 쓸 지 다시 연산한 값을 쓸지 정하게 된다. 
+       지역변수에 대입되는 객체의 경우 매번 새로운(주소값이 다른) 객체를 생성해서 대입되게 된다. 
+       이 때 이 지역변수의 변화는 useEffect같은 기능을 호출하냐 안하냐라는 문제를 야기하게 될 수 있으므로
+       객체의 지역변수에 변화를 주고 싶지 않을 때 useMemo를 사용할 수 있다. 
+
+       정리 : 지역변수에 객체를 대입하고 그 지역변수의 변화로 useEffect같은 작업을 한다면 지역변수의 객체를
+           useMemo를 써서 대입하자. 
+    -->
+    <script type="text/babel">
+        const {useState, useEffect, useMemo} = React;
+
+        function App() {    
+            const [isKorea, setIsKorea] = useState(true);
+            const [number, setNumber] = useState(0);
+
+            console.log('렌더링');
+
+            /* 1. 지역 변수에 문자열로 초기화(number state 변화 시 location에 변화가 없다. (재할당) - 기본 자료형이라서) */
+            // const location = isKorea ? '한국' : '외국';
+
+            /* 2. 지역 변수에 객체로 초기화(number state 변화 시 location에 변화가 있다. (재할당) - 객체의 주소값이라서) */
+            // const location = {
+            //     country : isKorea ? '한국' : '외국'
+            // };
+
+            /* 3. 지역 변수에 useMemo의 반환값으로 초기화(number state 변화 시 location에 변화가 없다. (재할당을 하지 않는다.) - isKorea가 동일하므로) */
+            const location = useMemo(() => {
+                return {
+                    country: isKorea ? '한국' : '외국'
+                }
+            }, [isKorea])
+
+            /* useEffect를 사용해서 콜백함수를 mount 시점 및 location 값에 변화가 있을 때만 동작 */
+            useEffect(() => {
+                console.log('useEffect 호출');
+            }, [location]);
+
+            return (
+
+                <>
+                    <h2> 지금 당신의 위치는? </h2>
+                    <p> 국가: {location.country} </p>
+                    <button onClick = {() => setIsKorea(!isKorea)}> 국가 토글하기 </button>
+
+                    <br/>
+                    <h2> 좋아하는 숫자는? </h2>
+                    <input
+                        type="number"
+                        value={number}
+                        onChange = {e => setNumber(e.target.value)}
+                    />
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+</body>
+</html>

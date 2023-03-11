@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const {useState} = React;
+
+        const hardCalculator = (num) => {
+            console.log('어려운 계산');
+
+            for(let i = 0; i < 1999999999; i++){
+
+                // blank
+            }
+
+            return num + 10000;
+        }
+
+        const easyCalculator = (num) => {
+            console.log('쉬운 계산')
+
+            return num + 1;
+        }
+
+        function App() {
+
+            /* 시간이 얼마 걸리지 않는 연산과 관련된 state 및 지역변수와 함수를 추가한다. */
+            const [hardNumber, setHardNumber] = useState(1);
+            const [easyNumber, setEasyNumber] = useState(1);
+
+            const hardSum = hardCalculator(hardNumber);
+            const easySum = easyCalculator(easyNumber);
+
+            /*
+                시간이 얼마 걸리지 않는 연산을 수행해서 state가 바뀔 때도 다시 화면을 랜더링 하기 위해 
+                해당 App 함수를 다시 실행하기 때문에 지역변수를 초기화하기 위한 hardCaclulator 및 easyCacluator 함수를
+                둘 다 다시 수행한다. (불필요한 작업으로 느려진다.)
+            */
+            return(
+                <>
+                    <h3>어려운 계산기</h3>
+                    <input 
+                        type="number"
+                        value={hardNumber}
+                        onChange={e=> setHardNumber(parseInt(e.target.value))}
+                    />
+                    <span> + 10000 = {hardSum}</span>
+                    
+                    <h3>쉬운 계산기</h3>
+                    <input 
+                        type="number"
+                        value={easyNumber}
+                        onChange={e=> setEasyNumber(parseInt(e.target.value))}
+                    />
+                    <span> + 1 = {easySum}</span>
+
+                </>
+            );
+            
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+</body>
+</html>

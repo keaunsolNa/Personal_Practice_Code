@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        /* useMemo 훅스도 꺼낸다. */
+        const {useState, useMemo} = React;
+
+        const hardCalculator = (num) => {
+            console.log('어려운 계산');
+
+            for(let i = 0; i < 1999999999; i++){
+
+                // blank
+            }
+
+            return num + 10000;
+        }
+
+        const easyCalculator = (num) => {
+            console.log('쉬운 계산')
+
+            return num + 1;
+        }
+
+        function App() {
+
+            const [hardNumber, setHardNumber] = useState(1);
+            const [easyNumber, setEasyNumber] = useState(1);
+
+            /* 
+                간단한 작업을 할 때도 시간이 오래 걸리는 작업까지 함께 수행하기에는 너무 비효율적이기 때문에
+                어려운 연산을 통해 나온 값을 메모리 상에 저장해(캐싱) 두고, 그 값이 변경되지 않을 때는 다시 
+                렌더링(연산)되지 않도록 한다. 
+                연산으로 얻은 값 자체를 메모라이즈 하기 위해 사용되는 hooks가 useMemo이다. 
+            */
+            const hardSum = useMemo(() => {
+                return hardCalculator(hardNumber)
+            }, [hardNumber]);
+
+            const easySum = useMemo(() => {
+                return easyCalculator(easyNumber)
+            }, [easyNumber]);
+
+            return(
+                <>
+                    <h3>어려운 계산기</h3>
+                    <input 
+                        type="number"
+                        value={hardNumber}
+                        onChange={e=> setHardNumber(parseInt(e.target.value))}
+                    />
+                    <span> + 10000 = {hardSum}</span>
+                    
+                    <h3>쉬운 계산기</h3>
+                    <input 
+                        type="number"
+                        value={easyNumber}
+                        onChange={e=> setEasyNumber(parseInt(e.target.value))}
+                    />
+                    <span> + 1 = {easySum}</span>
+
+                </>
+            );
+            
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+</body>
+</html>
