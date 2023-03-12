@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const {useState, useRef, useEffect} = React;
+
+        function LoginComponent() {
+
+            const [form, setForm] = useState({
+                username: '',
+                password: ''
+            });
+    
+            const usernameRef = useRef();
+
+            useEffect(() => {
+                console.log(usernameRef);
+                usernameRef.current.focus();        // 마운트 시점에 useRef로 저장한 태그에 포커스 잡기
+            }, [])
+
+            const onChangeHandler = (e) => {
+                setForm({
+                    ...form,
+                    [e.target.name] : e.target.value
+                });
+            }
+
+            const onClickHandler = () => {
+                alert(`username : ${form.username} \n password: ${form.password}`);
+                setForm({
+                    username:'',
+                    password:''
+                });
+                usernameRef.current.focus();         // 버튼 클릭 시점에 useRef로 저장한 태그에 포커스 잡기
+            }
+ 
+            /* input 태그의 ref 속성에 useRef 값을 적용하면 useRef는 해당 태그를 참조한다.(일종의 저장해서 쓰는 선택자 개념이다.) */
+            return(
+                <>
+                    <input 
+                        type="text"
+                        name="username"
+                        placeholder="이름"
+                        onChange = {onChangeHandler}
+                        value={form.username}
+                        ref={usernameRef}
+                    />
+                    <br/>
+                    <input 
+                        type="password"
+                        name="password"
+                        placeholder="비밀번호"
+                        onChange = {onChangeHandler}
+                        value={form.password}
+                    />
+                    <br/>
+                    <button onClick={onClickHandler}>로그인</button>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<LoginComponent/>);
+    </script>
+</body>
+</html>
