@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .page {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .footer {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const {useState} = React;
+
+        function Header({isDark}) {
+            return(
+                <header
+                    className="header"
+                    style={
+                        {
+                            backgroundColor : isDark ? 'black' : 'lightgray',
+                            color : isDark ? 'white' : 'black'
+                        }
+                    }
+                >
+                        <h1>Hello World </h1>
+                </header>
+            )
+        }
+
+        function Content({isDark}) {
+            return(
+                <div
+                    className="content"
+                    style={
+                        {
+                            backgroundColor : isDark ? 'black' : 'lightgray',
+                            color : isDark ? 'white' : 'black'
+                        }
+                    }
+                >
+                    <p>내용입니다.</p>
+                </div>
+            )
+        }
+
+        function Footer({isDark, setIsDark}) {
+
+            const toggleHandler = () => {setIsDark(!isDark)}
+            return(
+                <footer
+                    className="footer"
+                    style={
+                        {
+                            backgroundColor : isDark ? 'black' : 'lightgray',
+                            color : isDark ? 'white' : 'black'
+                        }
+                    }
+                >
+                    <button onClick={toggleHandler}>{isDark ? '라이트모드' : '다크모드'}</button>
+                    Copyright 2023. keaunsol-na. all rights reserved.
+                </footer>
+            )
+            
+        }
+
+        function Page({isDark, setIsDark}) {
+            return(
+
+                <div className="page">  
+                    <Header isDark={isDark}/>
+                    <Content isDark={isDark}/>
+                    <Footer isDark={isDark} setIsDark={setIsDark}/>
+                </div>
+            )
+        }
+        function App() {
+            const [isDark, setIsDark] = useState(false);
+
+            return <Page isDark={isDark} setIsDark={setIsDark}/>;
+        }
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+    </script>
+</body>
+</html>
