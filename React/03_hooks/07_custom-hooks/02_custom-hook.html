@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        /* 반복되는 코드를 줄이기 위해(개선하기 위해) 사용하는 훅스를 사용해 보자 */
+
+        const {useState} = React;
+
+        function useInput() {
+
+            /*
+                input 태그에 입력 받은 값을 state로 관리하는 이유
+                1. 사용자가 입력한 값을 선택자 없이 읽어오기 위함
+                2. react는 form태그를 쓰지 않는다.(state의 값을 비동기 방식 통신을 하여 다른 곳으로 전송하게 된다.)
+            */
+            const [value, setValue] = useState('');
+            const onChange = (e) => setValue(e.target.value);
+
+            return {value, onChange};
+        }
+
+        function App() {
+
+            const name = useInput();
+            const password = useInput();
+            const email = useInput();
+
+            return (
+                <div>
+                    <label>이름: </label>
+                    <input type="text" value={name.value} onChange={name.onChange}/>
+                    <br/>
+                    <label>비밀번호: </label>
+                    <input type="password" {...password}/>  {/* 바벨에서 제공되는 축약형 문법 */}
+                    <br/>
+                    <label>이메일: </label>
+                    <input type="email" {...email}/>
+                    <br/>
+                    <h4>name: {name.value}</h4>
+                    <h4>password: {password.value}</h4>
+                    <h4>email: {email.value}</h4>
+                </div>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+    </script>
+</body>
+</html>
