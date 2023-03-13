@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /* promise를 더 쉽게 사용할 수 있게 async/await가 ES2017(ES8)에서 추가되었다. */
+
+        /* 앞에서 사용한 비동기 처리 및 promise를 반환하는 함수 재사용 */
+        function increase(number) {
+            const promise = new Promise((resolve, reject) => {
+                setTimeout (
+                    () => {
+                        const result = number + 10;
+
+                        if(result > 50) {
+                            const e = new Error('NumberTooBig');
+
+                            return reject(e);
+                        }
+
+                        resolve(result);
+                    },
+                    1000
+                );
+            });
+
+            return promise;
+        }
+
+        /*
+            await의 두가지 기능
+            1. await가 달린 함수의 결과인 promise에 담긴 결과(promise 내부의 resolve에 담긴 결과)를 반환한다. 
+            2. await가 달린 비동기 처리들은 동기식으로 동작하게 한다. 
+        */
+        async function run() {
+
+            try{
+
+                let result = await increase(0);
+                console.log(result);
+    
+                result = await increase(result);
+                console.log(result);
+    
+                result = await increase(result);
+                console.log(result);
+    
+                result = await increase(result);
+                console.log(result);
+    
+                result = await increase(result);
+                console.log(result);
+    
+                result = await increase(result);
+                console.log(result);
+
+            } catch(e) {
+
+                console.log(e, ' 발생')
+
+            }
+
+        }
+
+        run();
+    </script>
+</body>
+</html>
