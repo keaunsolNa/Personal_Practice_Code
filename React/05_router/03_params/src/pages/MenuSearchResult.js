@@ -23,7 +23,7 @@ function MenuSearchResult () {
 
     return (
         <>
-            <h1>검색 결과야</h1>
+            <h1>검색 결과</h1>
             <div className={boxStyle.MenuBox}>
                 {menuList.map(menu => <MenuItem key={menu.menuCode} menu={menu}/>)}
             </div>

@@ -17,7 +17,8 @@ function MenuDetails() {
     useEffect(
         () => {
             setMenu(getMenuDetail(menuCode));
-        },[]
+        },
+        []
     );
 
     return (
