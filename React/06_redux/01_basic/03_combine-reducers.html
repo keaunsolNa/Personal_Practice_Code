@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/redux@4.2.1/dist/redux.js"></script>
+    <script src="https://unpkg.com/react-redux@8.0.5/dist/react-redux.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        /* 
+            관리 할 state가 복잡하거나 reducer 함수로 관리해야 할 성격이 다른 경우 
+            combine reducer를 이용할 수 있다.
+        */
+        const {Provider, useSelector, useDispatch} = ReactRedux;
+        const {combineReducers, createStore} = Redux;
+
+        /* 관리해야 할 state들과 초기값 설정 */
+        const countInitState = {
+            currentCount: 0
+        }
+
+        const activationInitState = {
+            isActivity: false
+        }
+
+        const userInitState = {
+            name: '',
+            email: '',
+            phone: ''
+        }
+
+        /*
+            리듀서 함수를 작성 시 주의할 사항은 state가 객체일 때 state 객체에 변화를 주기 위해서는
+            매번 반드시 새로운 객체를 생성해서 반환해야 한다. 
+            (리듀서 함수의 state 변경 여부는 주소값 일치 여부를 확인하는 방식으로 성능을 개선시켰기 때문에, 
+             객체 내부의 값만 변경해서 주소값은 동일할 경우 state의 변화가 없는 것으로 감지하게 된다.)
+        */
+        const rootReducer = combineReducers({
+            countReducer: (state = countInitState, action) => {
+                console.log('countReducer 호출');
+                const {type, payload} = action;
+
+                switch(type) {
+                    case 'INCREMENT':
+                        return {
+                            currentCount: state.currentCount + payload.incrementValue
+                        };
+                    case 'DECREMENT':
+                        return {
+                            currentCount: state.currentCount - payload.incrementValue
+                        };
+                    default: 
+                        return state;
+                }
+            },
+            activationReducer: (state = activationInitState, action) => {
+                console.log('activationReducer 호출');
+                const {type} = action;
+
+                switch(type) {
+                    case 'TOGGLE' :
+                        return {
+                            isActivity: !state.isActivity 
+                        };
+                    default: 
+                        return state;
+                }
+
+            },
+            userReducer: (state = userInitState, action) => {
+                console.log('userReducer 호출');
+                const {type, payload} = action;
+
+                switch(type) {
+                    case 'INPUT':
+                        return {
+                            ...state,
+                            [payload.name]: payload.value
+                        };
+                    default: 
+                        return state;
+                }
+            }
+        });
+
+        const store = createStore(rootReducer);
+        
+        function App() {
+
+            const { currentCount } = useSelector(state => state.countReducer);
+            const { isActivity } = useSelector(state => state.activationReducer);
+            const { name, email, phone } = useSelector(state => state.userReducer);
+
+            const dispatch = useDispatch();
+
+            const increseCount = () => {
+                dispatch({
+                    type: 'INCREMENT',
+                    payload: {
+                        incrementValue: 1
+                    }
+                });
+            }
+
+            const decreaseCount = () => {
+                dispatch({
+                    type: 'DECREMENT',
+                    payload: {
+                        incrementValue: 1
+                    }
+                });
+            }
+            
+            const toggleActivation = () => {
+                dispatch({
+                    type: 'TOGGLE'
+                });
+            }
+
+            const onChangeHandler = (e) => {
+                dispatch({
+                    type: 'INPUT',
+                    payload: {
+                        name: e.target.name,
+                        value: e.target.value
+                    }
+                });
+            }
+
+
+            return (
+                <>
+                    <h1>currentCount: {currentCount}</h1>
+                    <button onClick={increseCount}>1증가</button>
+                    <button onClick={decreaseCount}>1감소</button>
+                    <h1>isActivity: {isActivity.toString()}</h1>
+                    <button onClick={toggleActivation}>toggle activation</button>
+                    <br/>
+                    <h3>input control</h3>
+                    <label>name : </label>
+                    <input type="text" name="name" value={name} onChange={onChangeHandler}/>
+                    <br/>                    
+                    <label>email : </label>
+                    <input type="text" name="email" value={email} onChange={onChangeHandler}/>
+                    <br/>                    
+                    <label>phone : </label>
+                    <input type="text" name="phone" value={phone} onChange={onChangeHandler}/>
+                    <br/>                    
+                    <h3>name : {name}</h3>
+                    <h3>email : {email}</h3>  
+                    <h3>phone : {phone}</h3>
+
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        );
+
+    </script>
+</body>
+</html>

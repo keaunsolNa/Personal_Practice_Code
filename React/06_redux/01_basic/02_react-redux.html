@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/redux@4.2.1/dist/redux.js"></script>
+    <script src="https://unpkg.com/react-redux@8.0.5/dist/react-redux.js"></script>
+</head>
+<body>
+    <div id="root"></div>    
+
+    <script type="text/babel">
+        const {Provider, useSelector, useDispatch} = ReactRedux;
+        const {createStore} = Redux;
+
+        const initialState = 0;
+
+        /*
+            state를 변경하기 위한 리듀서 함수를 작성한다. 
+            이 때 action은 dispatch를 호출하는 쪽에서 전달하는 state에 대한
+            주문서 개념으로 행위의 종류(type)와 state 변경에 대한 내용(payload)을 담고 있다.
+        */
+        // function reducer(state = initialState, action) {
+        // const {type, payload} = action;
+        function reducer(state = initialState, {type, payload}) {
+
+            switch(type){
+                case 'INCREMENT':
+                    return state + payload.incrementValue;
+                case 'DECREMENT':
+                    return state - payload.decrementValue;
+                default:
+                    return state;
+            }
+        }
+
+        /* 리듀서 함수를 이용하여 스토어를 생성한다. */
+        const store = createStore(reducer);
+
+        function App() {
+
+            /*
+                useSelector 훅을 이용하여 store가 관리하는 state를 이용할 수 있다. 
+                useSelector는 반드시 인자로 state를 매개변수로 하는 함수를 콜백함수로 전달해야 한다. 
+            */
+            const count = useSelector(state => state);
+
+            /*
+                useDispatch 훅을 이용하여 dispatch를 호출할 수 있다.(즉, 리듀서를 호출 할 수 있다.)
+                state 변경에 필요한 값은 action에 담아 전달한다. 
+            */
+            const dispatch = useDispatch();
+
+            const increaseCounte = () => {
+                dispatch({
+                    type: 'INCREMENT',
+                    payload: {
+                        incrementValue: 2
+                    }
+                });
+            }
+
+            const decreaseCounte = () => {
+                dispatch({
+                    type: 'DECREMENT',
+                    payload: {
+                        decrementValue: 2
+                    }
+                });
+            }
+
+            return (
+                <>
+                    <h1>Count: {count} </h1>
+                    <button onClick={increaseCounte}>2 증가</button>
+                    <button onClick={decreaseCounte}>2 감소</button>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        );
+
+    </script>
+
+</body>
+</html>
