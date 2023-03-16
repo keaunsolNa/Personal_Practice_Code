@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/redux@4.2.1/dist/redux.js"></script>
+</head>
+<body>
+    <script>
+
+        /*
+            리덕스는 상태관리를 하기 위한 옵저버 패턴의 라이브러리이다.
+            앱의 상태 전부는 하나의 저장소(store)안에 있는 객체 트리에 저장된다.
+            상태 트리를 변경하는 유일한 방법은 어떤 행동이 일어날지에 해당하는 action이다. 
+            action에 따라 상태를 어떻게 변경할지를 명시하기 위해 함수를 작성하고
+            이를 reudcer함수라고 한다.
+
+            리덕스의 3가지 원칙
+            1. Single source of truth
+                - 스토어라는 하나뿐인 데이터 공간을 이용하기 때문에 신뢰할 수 있는 데이터다.
+            2. State is read-only
+                - 리덕스에서는 액션을 전달하는 리듀서 함수를 이용해서만 상태를 변경하며 직접 
+                  state를 변경하지 못 한다.
+            3. Change are made with pure function
+                - 변경은 오로지 순수 함수로만 가능하다. (이 때문에 리듀서를 이용한다.)
+        */
+
+        const {createStore} = Redux;    
+
+        function counter(state = 0, action) {
+
+            /*
+                action은 스토어에 운반할 데이터를 말하며 주문서와 비슷한 개념이다. 
+                (action은 꼭 이 포맷이 아니어도 되지만 이후 배울 redux-actions에서는 
+                 고정이므로 이 포맷에 익숙해지자.)
+                {
+                    type: 'ACTION_NAME',                    // 필수
+                    payload: {name : '홍길동', age: 20}     // 옵션
+                }
+            */
+            switch(action.type) {
+                case 'INCREMENT': 
+                    return state + 1;
+                case 'DECREMENT':
+                    return state - 1;
+                default:
+                    return state;
+            }
+        }
+
+        /*
+            앱의 상태를 보관하는 리덕스 저장소를 만든다. 
+            통상 store라고 하며, store가 제공하는 API는 subscribe, dispatch, getState가 있다. 
+        */
+        const store = createStore(counter);
+
+        /*
+            스토어의 상태변화를 구독하여 실행 될 콜백 함수를 전달한다. 
+            스토어의 상태값이 변화하면 콜백함수가 호출 된다. 
+            (리액트랑 연동하는 react redux에서는 직접 subscribe를 호출하지 않는다.)
+        */
+        store.subscribe(() => console.log(store.getState()));
+
+        /*
+            dispatch는 리듀서 함수를 호출하며, state는 현재 상태가 리듀서에 자동으로 전달되며 호출된다. 
+            dispatch를 이용해 action을 넣어 호출하게 되면 리듀서 함수의 두번째 인자로 값을 전달하게 된다. 
+            state를 변경하는 유일한 방법은 dispatch를 통해 리듀서에게 액션을 보내는 것 뿐이다.
+        */
+        store.dispatch({type: 'INCREMENT'});
+        store.dispatch({type: 'INCREMENT'});
+        store.dispatch({type: 'DECREMENT'});
+    </script>
+</body>
+</html>
