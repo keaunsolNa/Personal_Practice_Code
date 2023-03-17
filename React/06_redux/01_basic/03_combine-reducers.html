@@ -91,14 +91,30 @@
             }
         });
 
-        const store = createStore(rootReducer);
+        /*
+            store는 생성 시 reducer는 한 개만 사용할 수 있기 때문에 combineReducers를 이용한
+            rootReducer를 이용한다.
+        */
+        const store = createStore(
+            rootReducer,
+
+            /* 크롬 확장 프로그램(redux_devtools) 설치 후 적용하기 위해 추가 */
+            window.__REDUX_DEVTOOLS_EXTENSION__&& window.__REDUX_DEVTOOLS_EXTENSION__()
+            );
         
         function App() {
 
+            /* store에 있는 state들 확인 */
+            // console.log(useSelector(state => state));
+            /* combineReducers를 이용하는 경우 useSelecotr의 콜백함수를 통해 리듀서별로 관리되는 state를 반환 */
             const { currentCount } = useSelector(state => state.countReducer);
             const { isActivity } = useSelector(state => state.activationReducer);
             const { name, email, phone } = useSelector(state => state.userReducer);
 
+            /* 
+                useDispatch hock을 호출해서 반환받는 dispatch로 리듀서에 action을 넘기고 state를 수정한다. 
+                (combineReducers에 있는 모든 리듀서 함수들이 호출된다.)
+            */
             const dispatch = useDispatch();
 
             const increseCount = () => {
