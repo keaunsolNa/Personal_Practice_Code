@@ -14,43 +14,50 @@
 </head>
 <body>
     <div id="root"></div>
-
     <script type="text/babel">
-        const {Provider, useSelector, useDispatch} = ReactRedux;
-        const {createStore} = Redux;
-        const {createAction, createActions, handleActions} = ReduxActions;
+
+        /* 리덕스 미들웨어 여러 개 사용 시 적용 우선순위 */
+
+        /* 미들웨어 */
+        const firstMiddleware = store => next => action => {
+            console.log('first middleware');               
+            const result = next(action);       
+
+            return result;                     
+        }
+
+        const secondMiddleware = store => next => action => {
+            console.log('second middleware');               
+            const result = next(action);       
+
+            return result;                     
+        }
+
+        const thirdMiddleware = store => next => action => {
+            console.log('third middleware');               
+            const result = next(action);       
+
+            return result;                     
+        }
+
+        /* ------------------------------------------------------------ */
+        /* module */
+        const {createActions, handleActions} = ReduxActions;
+
 
         /* 초기값 */
-        const initialState = 0;
-        
+        const inititalState = 0;
+
         /* 액션 */
-        /* 액션 타입을 상수로 지정(접두사가 있게) */
-        const INCREMENT = 'count/INCREASE';         // 동사형으로 표현한다.
+        const INCREMENT = 'count/INCREASE';
         const DECREMENT = 'count/DECREASE';
-    
-        /* 1. createAction 사용*/
-        // const increase = createAction(INCREMENT, (amount = 1) => ({incrementValue: amount}));
-        // const decrease = createAction(DECREMENT, (amount = 1) => ({decrementValue: amount}));
 
-        // console.log(increase());        // action 객체
-        // console.log(decrease());       
-
-        /* 2. createActions 사용 */
-        /* 
-            한번의 createActions 호출 만으로 action 객체를 반환하는 메소드들을 한번에 정의할 수 있다. 
-            (하나의 객체로 반환된다.)
-        */
         const {count: {increase, decrease}} = createActions({
             [INCREMENT]: (amount = 1) => ({incrementValue: amount}),
             [DECREMENT]: (amount = 1) => ({decrementValue: amount})
         });
 
-        // console.log(increase());
-        // console.log(decrease());
-
         /* 리듀서 */
-        /* 3. handleActions 사용 */
-        /* switch문을 사용하지 않고 action에 따라 state를 처리하는 리듀서 생성 */
         const reducer = handleActions(
             {
                 [INCREMENT]: (state, {payload: {incrementValue}}) => {
@@ -60,42 +67,51 @@
                     return state - decrementValue;
                 }
             },
-            initialState    // store에 저장될 초기값
+            inititalState
         )
+        /* ------------------------------------------------------------ */
+        /* UI */
+        const {useSelector, useDispatch} = ReactRedux;
 
-        /* ------------------------------------------------------------------ */
         function App() {
 
             const count = useSelector(state => state);
-            const dispatch = useDispatch(); 
+            const dispatch = useDispatch();
 
             const increaseCount = () => {
-                // dispatch(state값을 1 증가하기 위한 액션 객체)
-                dispatch(increase());
+                dispatch(increase())
             }
 
             const decreaseCount = () => {
-                // dispatch(state값을 1 감소하기 위한 액션 객체)
-                dispatch(decrease());
-            }  
-
+                dispatch(decrease())
+            }
             return (
                 <>
-                    <h1>Counter : {count}</h1>
+                    <h1>Count: {count}</h1>
                     <button onClick={increaseCount}>1증가</button>
                     <button onClick={decreaseCount}>1감소</button>
                 </>
             );
         }
 
-        /* 스토어 */
-        const store = createStore(reducer);
+        /* ------------------------------------------------------------ */
+        const {createStore, applyMiddleware} = Redux;
+
+        const store = createStore(reducer, 
+            applyMiddleware(
+                firstMiddleware,
+                secondMiddleware,
+                thirdMiddleware
+            )
+        );
+        /* ------------------------------------------------------------ */
+        const {Provider} = ReactRedux;
+
         ReactDOM.createRoot(document.getElementById('root')).render(
             <Provider store={store}>
                 <App/>
             </Provider>
-        )
-        /* ------------------------------------------------------------------ */
+        );
     </script>
 </body>
 </html>

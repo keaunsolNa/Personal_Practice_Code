@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/redux@4.2.0/dist/redux.js"></script>
+    <script src="https://unpkg.com/react-redux@8.0.4/dist/react-redux.js"></script>
+    <script src="https://unpkg.com/redux-actions@2.6.5/dist/redux-actions.js"></script>
+    <script src="https://unpkg.com/redux-logger@3.0.6/dist/redux-logger.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const {createActions, handleActions} = ReduxActions;
+
+        /* 초기값 */
+        const initialState = [];
+
+        /* 액션 */
+        const FETCH_DATA = 'FETCH_DATA';
+
+        /* 
+          액션의 타입이 언더스코어로 연결된 단어(스네이크 표기법)는
+          낙타봉 표기법으로 치환되어 함수 이름으로 나온다. 
+        */
+        const {fetchData} = createActions({
+
+            /* 
+              async 함수의 특징 
+              1. 반환값이 promise 객체이다. 
+              2. 내부에 await가 달린 비동기 함수가 있으면 나머지는 기다려야 되지만
+                 다른 비동기 및 return은 기다리지 않는다.(return은 그냥 실행 됨)
+            */
+            [FETCH_DATA]: async() => {
+
+                const response = 
+                  await fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json());
+                
+                /* 비동기 처리의 await를 기다렸다가 console.log는 동기식으로 이후에 나옴 */
+                console.log('fetch 기다리고 나온 결과: ', response);
+
+                /*
+                    response를 반환할 때 비동기 작업은 아직 실행중이고 결과가 만들어지지 않은 상태인데
+                    값을 리턴해버리고 promise 객체 자체를 반환해 버린다. 
+                    즉, 리턴은 위의 비동기 흐름과 상관 없이 해당 함수 자체를 종료시키며 컨트롤 할 수 없다.
+                */
+                return [
+                    ...response
+                ];     
+            }
+        });
+
+        // console.log(fetchData());
+
+        /* 리듀서 */
+        const reducer = handleActions(
+            {
+                [FETCH_DATA]: (state, {payload}) => {
+
+                    /* 응답 받은 객체는 배열이 아니라 promise 객체가 된다. */
+                    console.log('payload: ', payload);
+
+                    /* 결론적으로는 promise 객체가 넘어와서 스프레드 연산을 할 수 없다는 에러 발생 */
+                    return [
+                        ...payload
+                    ];
+                }
+            },
+            initialState
+        );
+
+        /* UI */
+        const {useSelector, useDispatch} = ReactRedux;
+
+        function App() {
+
+            const users = useSelector(state => state);
+            const dispatch = useDispatch();
+
+            const onClickHandler = () => {
+                dispatch(fetchData());
+            }
+
+            return (
+                <>
+                    <h1>회원 목록</h1>
+                    <button onClick={onClickHandler}>조회하기</button>
+                </>
+            );
+        }
+
+        const {createStore} = Redux;
+        const {Provider} = ReactRedux;
+
+        const store = createStore(reducer);
+        ReactDOM.createRoot(document.getElementById('root')).render(
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        );
+    </script>
+</body>
+</html>
