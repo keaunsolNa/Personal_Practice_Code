@@ -1,0 +1,36 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t keaunsol/docker-fullstack -f ./frontend/Dockerfile.dev ./frontend
+
+script:
+  - docker run -e CI=true keaunsol/docker-fullstack npm run test
+
+after_success:
+  - docker build -t keaunsol/docker-frontend ./frontend
+  - docker build -t keaunsol/docker-backend ./backend
+  - docker build -t keaunsol/docker-nginx ./nginx
+
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  - docker push keaunsol/docker-frontend
+  - docker push keaunsol/docker-backend
+  - docker push keaunsol/docker-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-northeast-2"
+  app: "docker-fullstack-app"
+  env: "DockerFullstackApp-env"
+  bucket_name: elasticbeanstalk-ap-northeast-2-972153559337
+  bucket_path: "docker-fullstack-app"
+  on:
+    branch: main
+  
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
