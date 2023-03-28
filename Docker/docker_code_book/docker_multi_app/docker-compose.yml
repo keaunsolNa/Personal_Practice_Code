@@ -20,13 +20,20 @@ services:
     volumes:
       - /app/node_modules
       - ./backend:/app
-    mem_limit: 128m
-    environment: 
-      MYSQL_HOST: $MYSQL_HOST 
-      MYSQL_USER: $MYSQL_USER 
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: $MYSQL_DATABASE
-      MYSQL_PORT: $MYSQL_PORT   
+
+    # redis-server:
+    #   image: "redis"
+    # node-app:
+    #   build: .
+    #   ports:
+    #   - "5000:8080"
+    # mem_limit: 128m
+    # environment: 
+    #   MYSQL_HOST: $MYSQL_HOST 
+    #   MYSQL_USER: $MYSQL_USER 
+    #   MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+    #   MYSQL_DATABASE: $MYSQL_DATABASE
+    #   MYSQL_PORT: $MYSQL_PORT   
 
   # mysql:
   #   build: ./mysql
