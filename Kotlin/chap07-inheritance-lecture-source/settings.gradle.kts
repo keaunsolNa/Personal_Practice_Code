@@ -1,0 +1,3 @@
+
+rootProject.name = "chap07-inheritance-lecture-source"
+

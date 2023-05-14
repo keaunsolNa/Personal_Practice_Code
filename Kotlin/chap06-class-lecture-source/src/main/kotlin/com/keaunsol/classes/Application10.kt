@@ -8,10 +8,7 @@ package com.keaunsol.classes
     자바의 public static 개념에 하나의 인스턴스로 존재(singleton)하는 것이다.
  */
 
-/*
-    1. Companion Object는 어떤 클래스의 모든 인스턴스가 공유하는 객체를 만들 때 사용하며
-       클래스 당 한 개만 선언할 수 있다. (이름을 지어줄 수도 있다.)
- */
+/* 1. Companion Object는 어떤 클래스의 모든 인스턴스가 공유하는 객체를 만들 때 사용하며 클래스 당 한 개만 선언할 수 있다. (이름을 지어줄 수도 있다.) */
     class CompClass1{
     companion object TestComp {         // public static singleton
         val prop = "CompClass1에 작성 된 TestComp Companion Object의 prop 속성"
@@ -27,7 +24,7 @@ class CompClass2{
     }
 }
 
-/* 인터페이스 내에서도 Companion Object를 정의할 수 있다. */
+/* 3. 인터페이스 내에서도 Companion Object를 정의할 수 있다. */
 interface CompInterface{
     companion object  {         // public static singleton
         val prop = "CompInterface 작성 된 이름 없는 Companion Object의 prop 속성"
