@@ -1,4 +1,4 @@
-package com.example.securityserver.configure
+package com.example.securityserver.component.provider
 
 import com.example.securityserver.model.domain.user.Authority
 import io.jsonwebtoken.Jwts
@@ -16,15 +16,17 @@ import javax.servlet.http.HttpServletRequest
 @RequiredArgsConstructor
 @Component
 class JwtTokenProvider {
+
     private var secretKey = "hrtestSystemBykeaunsolhrtestSystemBykeaunsolhrtestSystemBykeaunsol"
 
-    // 토큰 유효시간 300분
+    // 토큰 유효시간 설정
     private val tokenValidTime = 300 * 60 * 1000L
     private val userDetailsService: UserDetailsService? = null
 
     // 객체 초기화, secretKey를 Base64로 인코딩한다.
     @PostConstruct
     protected fun init() {
+        println("JwtTokenProvider")
         secretKey = Base64.getEncoder().encodeToString(secretKey.toByteArray())
     }
 
@@ -52,7 +54,7 @@ class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).body.subject
     }
 
-    // Request의 Header에서 token 값을 가져옵니다. "X-AUTH-TOKEN" : "TOKEN값'
+    // Request의 Header에서 token 값을 가져온다. "X-AUTH-TOKEN" : "TOKEN값'
     fun resolveToken(request: HttpServletRequest): String {
         return request.getHeader("X-AUTH-TOKEN")
     }

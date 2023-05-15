@@ -1,15 +1,16 @@
-## ?? ?? ??
+## 서버 포트 설정
 server:
   port: 8088
 
+## jwt secret token
 jwt:
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
 
-## ??? ???? ??
+## 오라클 드라이버 설정
 spring:
   datasource:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl
+    url: jdbc:log4jdbc:oracle:thin:@localhost:1521:xe
     username: C##HR_SYSTEM
     password: HR_SYSTEM
     hikari:
