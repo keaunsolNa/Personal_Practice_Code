@@ -1,105 +1,34 @@
+// User.kt
 package com.example.securityserver.model.domain.user
 
-import lombok.*
-import java.io.Serializable
-import java.sql.Date
 import javax.persistence.*
 
 @Entity
-@Table(name = "EMP_BASE")
-@Data
-class User : Serializable {
+@Table(name = "user")
+class User(username: String, email: String) {
+
     @Id
-    @Column(name = "EMP_ID")
-    private val empId: Long? = null
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
+    var username: String = username
+    var email: String = email
 
-    @Column(name = "PASSWORD", nullable = false)
-    private val password: String? = null
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
-    @Column(name = "COMPANY_CD")
-    private val companyCd: String? = null
+        other as User
 
-    @Column(name = "EMP_NO")
-    private val empNo: Long? = null
+        if (id != other.id) return false
 
-    @Column(name = "EMP_NAME")
-    private val empName: String? = null
+        return true
+    }
 
-    @Column(name = "CTZ_NO", nullable = true)
-    private val ctzNo: String? = null
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
 
-    @Column(name = "EMAIL", nullable = true)
-    private val email: String? = null
-
-    @Column(name = "EMP_KIND_CD")
-    private val empKindCd: String? = null
-
-    @Column(name = "HIRE_CD")
-    private val hireCd: String? = null
-
-    @Column(name = "IN_OFF_YN")
-    private val inOffYn: String? = null
-
-    @Column(name = "GENDER_CD")
-    private val genderCd: String? = null
-
-    @Column(name = "BIRTH_YMD")
-    private val birthYmd: Date? = null
-
-    @Column(name = "POS_CD", nullable = true)
-    private val posCd: String? = null
-
-    @Column(name = "ORG_CD", nullable = true)
-    private val orgCd: String? = null
-
-    @Column(name = "DUTY_CD", nullable = true)
-    private val dutyCd: String? = null
-
-    @Column(name = "JOB_CD", nullable = true)
-    private val jobCd: String? = null
-
-    @Column(name = "PAY_ORG_CD", nullable = true)
-    private val payOrgCd: String? = null
-
-    @Column(name = "TEMP_YN")
-    private val tempYn: String? = null
-
-    @Column(name = "HIRE_YMD", nullable = true)
-    private val hireYmd: Date? = null
-
-    @Column(name = "RETIRE_YMD", nullable = true)
-    private val retireYmd: Date? = null
-
-    @Column(name = "RETIRE_TYPE_CD", nullable = true)
-    private val retireTypeCd: String? = null
-
-    @Column(name = "CAREER_NUM", nullable = true)
-    private val careerNum: Int? = null
-
-    @Column(name = "FILE_PATH_ID", nullable = true)
-    private val filePathId: String? = null
-
-    @Column(name = "MOD_USER_ID")
-    private val modUserId: Long? = null
-
-    @Column(name = "MOD_DATE")
-    private val modDate: Date? = null
-
-    @Column(name = "TZ_CD")
-    private val tzCd: String? = null
-
-    @Column(name = "TZ_DATE")
-    private val tzDate: Date? = null
-
-    @ManyToMany(cascade = [CascadeType.MERGE])
-    @JoinTable(
-        name = "ROLE",
-        joinColumns = [JoinColumn(name = "EMP_NO", referencedColumnName = "EMP_ID")],
-        inverseJoinColumns = [JoinColumn(name = "AUTHORITY_CODE", referencedColumnName = "AUTHORITY_CODE")]
-    )
-    private val roles: List<Authority>? = null
-
-    companion object {
-        private const val serialVersionUID = -4404887252879696483L
+    override fun toString(): String {
+        return "User(id=$id, name='$username', email='$email')"
     }
 }

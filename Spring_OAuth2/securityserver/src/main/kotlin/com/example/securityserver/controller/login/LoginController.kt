@@ -6,6 +6,7 @@
 //import com.example.securityserver.model.domain.user.EmpBase
 //import com.example.securityserver.model.domain.user.User
 //import com.example.securityserver.model.repository.login.LoginRepository
+//import com.example.securityserver.service.LoginService
 //import io.jsonwebtoken.ExpiredJwtException
 //import lombok.RequiredArgsConstructor
 //import org.springframework.security.crypto.password.PasswordEncoder
@@ -22,35 +23,53 @@
 //    private val jwtTokenProvider: JwtTokenProvider? = null
 //    private val passwordEncoder: PasswordEncoder? = null
 //    private val loginRepository: LoginRepository? = null
+//    private val loginService: LoginService? = null
 //
 //    // 로그인
 //    @PostMapping("/userCheck")
 //    fun login(@RequestBody user: EmpBase): String {
-//        val member: User? = loginRepository?.findById(user.getEmpId())
+//
+//        val member: User? = loginRepository?.findById(user.empId)
 //            ?.orElseThrow { IllegalArgumentException("가입되지 않은 ID 입니다.") }
-//        require(passwordEncoder!!.matches(user.getPassword(), member.getPassword())) { "잘못된 비밀번호입니다." }
-//        val roles: List<Authority?> = member.getRoles()
+//
+//        if (!passwordEncoder!!.matches(user.password, member!!.password)) {
+//            throw IllegalArgumentException("잘못된 비밀번호입니다.")
+//        }
+//
+//        val roles: List<Authority> = member.roles
 //        println(roles)
-//        return jwtTokenProvider!!.createToken(member.getEmpId() + "", roles)
+//
+//        return jwtTokenProvider!!.createToken(member.empId.toString(), roles)
 //    }
 //
 //    // 토큰 정보로 유저 객체 가져오기
-////    @PostMapping("getLoginUser")
-////    fun getUserId(@RequestBody token: String?): Any {
-////        println("GetLoginUser")
-////        val userId: MutableMap<String, String> = HashMap()
-////        println(token)
-////        try {
-////            val id = jwtTokenProvider!!.getUserPk(token)
-////            userId["SUCCESS"] = id
-////        } catch (e: ExpiredJwtException) {
-////            userId["ERROR"] = "토큰 기한 만료. 다시 로그인 해 주세요"
-////        } catch (e: Exception) {
-////            e.printStackTrace()
-////            userId["ERROR"] = e.toString()
-////        }
-////        return if (userId.containsKey("SUCCESS")) {
-////            userService.getUser(userId["SUCCESS"])
-////        } else userId
-////    }
+//    @PostMapping("getLoginUser")
+//    fun getUserId(@RequestBody token: String): Any? {
+//
+//        println("GetLoginUser")
+//        val userId: MutableMap<String, String> = HashMap()
+//
+//        try {
+//
+//            val id = jwtTokenProvider!!.getUserPk(token)
+//            userId["SUCCESS"] = id
+//
+//        } catch (e: ExpiredJwtException) {
+//
+//            userId["ERROR"] = "토큰 기한 만료. 다시 로그인 해 주세요"
+//
+//        } catch (e: Exception) {
+//
+//            e.printStackTrace()
+//            userId["ERROR"] = e.toString()
+//
+//        }
+//
+//        return if (userId.containsKey("SUCCESS")) {
+//
+//            loginService!!.getUser(userId["SUCCESS"])
+//
+//        } else userId
+//
+//    }
 //}

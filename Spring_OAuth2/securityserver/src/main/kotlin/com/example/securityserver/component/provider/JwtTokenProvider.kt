@@ -1,6 +1,8 @@
 package com.example.securityserver.component.provider
 
 import com.example.securityserver.model.domain.user.Authority
+import com.example.securityserver.model.repository.login.LoginRepository
+import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import lombok.RequiredArgsConstructor
@@ -18,24 +20,24 @@ import javax.servlet.http.HttpServletRequest
 class JwtTokenProvider {
 
     private var secretKey = "hrtestSystemBykeaunsolhrtestSystemBykeaunsolhrtestSystemBykeaunsol"
+    private val loginRepository: LoginRepository? = null;
 
     // 토큰 유효시간 설정
     private val tokenValidTime = 300 * 60 * 1000L
-    private val userDetailsService: UserDetailsService? = null
 
     // 객체 초기화, secretKey를 Base64로 인코딩한다.
     @PostConstruct
     protected fun init() {
-        println("JwtTokenProvider")
         secretKey = Base64.getEncoder().encodeToString(secretKey.toByteArray())
     }
 
     // JWT 토큰 생성
-    fun createToken(userPk: String?, roles: List<Authority?>): String {
-        val claims = Jwts.claims().setSubject(userPk) // JWT payload 에 저장되는 정보단위
-        claims["roles"] = roles
+    fun createToken(userPk: String): String {
+        val claims: Claims = Jwts.claims().setSubject(userPk) // JWT payload 에 저장되는 정보단위
+        claims["userPk"] = userPk
         val now = Date()
         return Jwts.builder()
+            .setHeaderParam("typ", "JWT")
             .setClaims(claims)
             .setIssuedAt(now)
             .setExpiration(Date(now.time + tokenValidTime))
@@ -44,23 +46,25 @@ class JwtTokenProvider {
     }
 
     // JWT 토큰에서 인증 정보 조회
-    fun getAuthentication(token: String?): Authentication {
-        val userDetails = userDetailsService!!.loadUserByUsername(getUserPk(token))
-        return UsernamePasswordAuthenticationToken(userDetails, "", userDetails.authorities)
+    fun getAuthentication(token: String): Authentication {
+        val userDetails = loginRepository?.findByUsername(getUserPk(token))
+
+        println(userDetails)
+        return UsernamePasswordAuthenticationToken(userDetails, "", userDetails?.authorities)
     }
 
     // 토큰에서 회원 정보 추출
-    fun getUserPk(token: String?): String {
+    fun getUserPk(token: String): String {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).body.subject
     }
 
     // Request의 Header에서 token 값을 가져온다. "X-AUTH-TOKEN" : "TOKEN값'
-    fun resolveToken(request: HttpServletRequest): String {
-        return request.getHeader("X-AUTH-TOKEN")
+    fun resolveToken(request: HttpServletRequest): String? {
+        return request.getHeader("Authorization")
     }
 
     // 토큰의 유효성 + 만료일자 확인
-    fun validateToken(jwtToken: String?): Boolean {
+    fun validateToken(jwtToken: String): Boolean {
         return try {
             val claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken)
             !claims.body.expiration.before(Date())

@@ -35,6 +35,11 @@ dependencies {
 	implementation ("io.jsonwebtoken:jjwt-api:0.11.5")
 	implementation ("io.jsonwebtoken:jjwt-impl:0.11.5")
 	implementation ("io.jsonwebtoken:jjwt-jackson:0.11.5")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	runtimeOnly("com.h2database:h2")
+
+
 	runtimeOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly ("net.coobird:thumbnailator:0.4.8")
 
@@ -45,7 +50,7 @@ dependencies {
 	testImplementation ("org.springframework.boot:spring-boot-starter-websocket")
 	testImplementation ("org.webjars:sockjs-client:1.0.2")
 
-	compileOnly ("org.projectlombok:lombok:1.18.26")
+	implementation  ("org.projectlombok:lombok:1.18.26")
 	annotationProcessor ("org.projectlombok:lombok:1.18.26")
 
 	implementation ("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16")
@@ -66,6 +71,7 @@ allOpen {
 }
 noArg {
 	annotation("com.my.Annotation")
+	annotation("javax.persistence.Entity")
 }
 
 tasks.withType<KotlinCompile> {

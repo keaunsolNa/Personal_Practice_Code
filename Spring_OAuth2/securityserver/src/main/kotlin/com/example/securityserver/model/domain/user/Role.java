@@ -3,23 +3,11 @@ package com.example.securityserver.model.domain.user;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-@Getter
 @Embeddable
+@Entity
 @Table(name="ROLE")
-@EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Role implements Serializable {
 
     /**
@@ -27,7 +15,7 @@ public class Role implements Serializable {
      */
     private static final long serialVersionUID = -2442439253944382064L;
 
-
+    @Id
     @Column(name = "AUTHORITY_CODE")
     private Long authorityCode;
 
@@ -37,6 +25,47 @@ public class Role implements Serializable {
     @ManyToMany(mappedBy="ROLE")
     private List<User> user;
 
+    public Role() {
 
+    }
+
+    public Long getAuthorityCode() {
+        return authorityCode;
+    }
+
+    public void setAuthorityCode(Long authorityCode) {
+        this.authorityCode = authorityCode;
+    }
+
+    public String getEmpNo() {
+        return empNo;
+    }
+
+    public void setEmpNo(String empNo) {
+        this.empNo = empNo;
+    }
+
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
+    }
+
+    public Role(Long authorityCode, String empNo, List<User> user) {
+        this.authorityCode = authorityCode;
+        this.empNo = empNo;
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "authorityCode=" + authorityCode +
+                ", empNo='" + empNo + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }
 

@@ -1,5 +1,6 @@
 package com.example.securityserver.configure
 
+import com.example.securityserver.component.filter.JwtAuthenticationFilter
 import com.example.securityserver.component.provider.JwtTokenProvider
 import lombok.RequiredArgsConstructor
 import org.springframework.context.annotation.Bean
@@ -9,12 +10,13 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 
 @RequiredArgsConstructor
 @EnableWebSecurity
-class SecurityConfiguration {
-    private val jwtTokenProvider: JwtTokenProvider? = null
+class SecurityConfiguration(private val jwtTokenProvider: JwtTokenProvider) {
+
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
 
@@ -31,13 +33,11 @@ class SecurityConfiguration {
         http
             .authorizeRequests { requests ->
                 requests
-                    .antMatchers("/user/**").authenticated()
-                    .antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
-                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                    .antMatchers("/**").access("hasRole('ROLE_EMPLOYEE')")
                     .anyRequest().permitAll()
             }
             .sessionManagement { management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-
+            .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
     }
 
