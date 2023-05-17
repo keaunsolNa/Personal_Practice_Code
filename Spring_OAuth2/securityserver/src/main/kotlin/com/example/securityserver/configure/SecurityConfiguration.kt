@@ -21,23 +21,21 @@ class SecurityConfiguration(private val jwtTokenProvider: JwtTokenProvider) {
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
 
         println("filterChain")
-        http.httpBasic().disable()
-            .csrf().ignoringAntMatchers("/h2-console/**").disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)	// 세션 비활성화
 
-        http.formLogin()
-            .loginProcessingUrl("/login")
-            .usernameParameter("empId")
-            .passwordParameter("password")
+        http.csrf().disable()
+//            .csrf().ignoringAntMatchers("/h2-console/**").disable()
+//            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)	// 세션 비활성화
 
         http
             .authorizeRequests { requests ->
                 requests
-                    .antMatchers("/**").access("hasRole('ROLE_EMPLOYEE')")
+                    .antMatchers("/user/**").authenticated()
+                    .antMatchers("/manager/**").access("hasRole('ROLE_EMPLOYEE')")
                     .anyRequest().permitAll()
             }
             .sessionManagement { management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
+
         return http.build()
     }
 

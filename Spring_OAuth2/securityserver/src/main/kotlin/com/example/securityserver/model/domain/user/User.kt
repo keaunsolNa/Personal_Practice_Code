@@ -1,34 +1,112 @@
-// User.kt
-package com.example.securityserver.model.domain.user
+package com.example.securityserver.model.domain.user;
 
-import javax.persistence.*
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
+import java.io.Serializable
+import java.sql.Date
+import javax.persistence.CascadeType
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.ManyToMany
+import javax.persistence.Table
 
 @Entity
-@Table(name = "user")
-class User(username: String, email: String) {
+@Table(name = "EMP_BASE")
+class User : Serializable, UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
-    var username: String = username
-    var email: String = email
+    var empId: Long? = null
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+    var userPassword: String? = null
 
-        other as User
+    var companyCd: String? = null
 
-        if (id != other.id) return false
+    var empNo: Long? = null
 
+    var ctzNo: String? = null
+
+    var email: String? = null
+
+    var empKindCd: String? = null
+
+    var hireCd: String? = null
+
+    var inOffYn: String? = null
+
+    var genderCd: String? = null
+
+    var birthYmd: Date? = null
+
+    var posCd: String? = null
+
+    var orgCd: String? = null
+
+    var jobCd: String? = null
+
+    var payOrgCd: String? = null
+
+    var tempYn: String? = null
+
+    var hireYmd: Date? = null
+
+    var retireYmd: Date? = null
+
+    var retireTypeCd: String? = null
+
+    var careerNum: Int? = null
+
+    var filePathId: String? = null
+
+    var modUserId: Long? = null
+
+    var modDate: Date? = null
+
+    var tzCd: String? = null
+
+    var tzDate: Date? = null
+
+    @ManyToMany(cascade = [CascadeType.MERGE])
+    @JoinTable(
+        name = "USER_ROLE",
+        joinColumns = [JoinColumn(name = "emp_id")],
+        inverseJoinColumns = [JoinColumn(name = "authority_code")]
+    )
+    var roles: MutableList<Authority>? = null
+
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+        val authorities = mutableListOf<GrantedAuthority>()
+        roles?.forEach { authority ->
+            authorities.add(SimpleGrantedAuthority(authority.authorityName))
+        }
+        return authorities
+    }
+
+    override fun getPassword(): String? {
+        return userPassword
+    }
+
+    override fun getUsername(): String? {
+        return empId.toString()
+    }
+
+    override fun isAccountNonExpired(): Boolean {
         return true
     }
 
-    override fun hashCode(): Int {
-        return id?.hashCode() ?: 0
+    override fun isAccountNonLocked(): Boolean {
+        return true
     }
 
-    override fun toString(): String {
-        return "User(id=$id, name='$username', email='$email')"
+    override fun isCredentialsNonExpired(): Boolean {
+        return true
     }
+
+    override fun isEnabled(): Boolean {
+        return true
+    }
+
+
 }

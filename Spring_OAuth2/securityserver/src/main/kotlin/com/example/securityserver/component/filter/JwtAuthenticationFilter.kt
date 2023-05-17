@@ -21,26 +21,21 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
     override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
 
         println("doFilter")
-        // NPE 방지, Token 존재할 때만 Filter를 태운다.
 
-            // 헤더에서 JWT 를 받아오기
-            val token: String? = jwtTokenProvider.resolveToken(request as HttpServletRequest)
+        // 헤더에서 JWT 를 받아오기
+        val token: String? = jwtTokenProvider.resolveToken(request as HttpServletRequest)
 
         println("token")
         println(token)
-            if(token != null){
 
             // 토큰 검증
-                if (jwtTokenProvider.validateToken(token)) {
+            if(token != null && jwtTokenProvider.validateToken(token)){
 
-                    // 토큰이 유효하면 토큰으로부터 유저 정보를 받아온다.
-                    val authentication: Authentication = jwtTokenProvider.getAuthentication(token)
+                // 토큰이 유효하면 토큰으로부터 유저 정보를 받아온다.
+                val authentication: Authentication = jwtTokenProvider.getAuthentication(token)
 
-                    // SecurityContext 에 Authentication 객체를 저장.
-                    SecurityContextHolder.getContext().authentication = authentication
-                }
-
-            } else {
+                // SecurityContext 에 Authentication 객체를 저장.
+                SecurityContextHolder.getContext().authentication = authentication
 
             }
 
