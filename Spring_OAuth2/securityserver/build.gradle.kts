@@ -59,9 +59,6 @@ dependencies {
 	implementation ("org.springframework:spring-support:2.0.8")
 	implementation ("org.webjars:webjars-locator-core")
 
-
-
-
 }
 
 allOpen {
@@ -69,6 +66,7 @@ allOpen {
 	annotation("javax.persistence.MappedSuperclass")
 	annotation("javax.persistence.Embeddable")
 }
+
 noArg {
 	annotation("com.my.Annotation")
 	annotation("javax.persistence.Entity")

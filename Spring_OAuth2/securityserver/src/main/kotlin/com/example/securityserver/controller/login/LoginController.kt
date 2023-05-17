@@ -4,7 +4,6 @@ package com.example.securityserver.controller.login
 import com.example.securityserver.component.provider.JwtTokenProvider
 import com.example.securityserver.model.domain.user.Authority
 import com.example.securityserver.model.domain.user.EmpBase
-import com.example.securityserver.model.domain.user.User
 import com.example.securityserver.model.repository.login.LoginRepository
 import com.example.securityserver.service.LoginService
 import io.jsonwebtoken.ExpiredJwtException
@@ -14,16 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import kotlin.reflect.typeOf
-
 
 @RestController
 @RequestMapping("/api/userlogin")
 @RequiredArgsConstructor
-class LoginController {
+class LoginController(
+    private val loginRepository: LoginRepository,
+) {
     private val jwtTokenProvider: JwtTokenProvider? = null
     private val passwordEncoder: PasswordEncoder? = null
-    private val loginRepository: LoginRepository? = null
     private val loginService: LoginService? = null
 
     // 로그인
@@ -33,18 +31,22 @@ class LoginController {
         println("로그인")
         println(user.empId is Long)
         println(user)
-        var member = loginRepository!!.findByEmpId(user.empId)
+        user.empNo = user.empId
 
-        println(member)
+        println(user)
+        var user = loginRepository!!.findByEmpId(user.empId)
 
-        if (!passwordEncoder!!.matches(user.userPassword, member?.userPassword)) {
-            throw IllegalArgumentException("잘못된 비밀번호입니다.")
-        }
+        println(user)
 
-        val roles: MutableList<Authority>? = member?.roles
+//        if (!passwordEncoder!!.matches(user.userPassword, member?.userPassword)) {
+//            throw IllegalArgumentException("잘못된 비밀번호입니다.")
+//        }
+
+        val roles: MutableList<Authority>? = user?.roles
         println(roles)
-
-        return jwtTokenProvider!!.createToken(member?.empId.toString())
+//
+        println(jwtTokenProvider!!.createToken(user?.empId.toString()))
+        return jwtTokenProvider!!.createToken(user?.empId.toString())
     }
 
     // 토큰 정보로 유저 객체 가져오기

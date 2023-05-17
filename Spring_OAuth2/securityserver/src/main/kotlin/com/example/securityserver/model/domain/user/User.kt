@@ -5,13 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.io.Serializable
 import java.sql.Date
-import javax.persistence.CascadeType
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.JoinTable
-import javax.persistence.ManyToMany
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "EMP_BASE")
@@ -19,6 +13,7 @@ class User : Serializable, UserDetails {
 
     @Id
     var empId: Long? = null
+
 
     var userPassword: String? = null
 
@@ -70,9 +65,9 @@ class User : Serializable, UserDetails {
 
     @ManyToMany(cascade = [CascadeType.MERGE])
     @JoinTable(
-        name = "USER_ROLE",
-        joinColumns = [JoinColumn(name = "emp_id")],
-        inverseJoinColumns = [JoinColumn(name = "authority_code")]
+        name = "ROLE",
+        joinColumns = [JoinColumn(name = "EMP_NO", referencedColumnName = "EMP_ID")],
+        inverseJoinColumns = [JoinColumn(name = "AUTHORITY_CODE", referencedColumnName = "ROLE_AUTHORITY_CODE")]
     )
     var roles: MutableList<Authority>? = null
 

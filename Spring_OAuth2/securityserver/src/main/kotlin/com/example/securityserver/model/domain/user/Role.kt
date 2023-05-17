@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "ROLE")
 class Role : Serializable {
     @Id
-    var authorityCode: Long? = null
+    var roleAuthorityCode: Long? = null
 
     @Id
     var empNo: String? = null
@@ -23,14 +23,14 @@ class Role : Serializable {
 
         other as Role
 
-        return authorityCode == other.authorityCode
+        return roleAuthorityCode == other.roleAuthorityCode
     }
 
     override fun hashCode(): Int {
-        return authorityCode?.hashCode() ?: 0
+        return roleAuthorityCode?.hashCode() ?: 0
     }
 
     override fun toString(): String {
-        return "ROLE(authorityCode=$authorityCode, empNo=$empNo, users=$users)"
+        return "ROLE(roleAuthorityCode=$roleAuthorityCode, empNo=$empNo, users=$users)"
     }
 }
