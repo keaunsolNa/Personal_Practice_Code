@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
 
+// ModelMapper Component
 @Configuration
 @ComponentScan("com.example.securityserver")
 class ModelMapperConfiguration {

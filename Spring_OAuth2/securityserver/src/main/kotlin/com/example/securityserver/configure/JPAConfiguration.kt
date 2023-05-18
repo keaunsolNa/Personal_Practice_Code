@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+// Spring Data JPA Component
 @Configuration
 @EntityScan(basePackages = ["com.example.securityserver"])
 @EnableJpaRepositories(basePackages = ["com.example.securityserver"])

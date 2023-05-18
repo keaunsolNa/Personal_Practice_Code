@@ -19,13 +19,8 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
     @Throws(IOException::class, ServletException::class)
     override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
 
-        println("doFilter")
-
         // 헤더에서 JWT 를 받아오기
         val token: String? = jwtTokenProvider.resolveToken(request as HttpServletRequest)
-
-        println("token")
-        println(token)
 
             // 토큰 검증
             if(token != null && jwtTokenProvider.validateToken(token)){

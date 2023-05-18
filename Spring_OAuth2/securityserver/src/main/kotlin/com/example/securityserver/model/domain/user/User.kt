@@ -14,7 +14,6 @@ class User : Serializable, UserDetails {
     @Id
     var empId: Long? = null
 
-
     var userPassword: String? = null
 
     var companyCd: String? = null
@@ -63,18 +62,14 @@ class User : Serializable, UserDetails {
 
     var tzDate: Date? = null
 
-    @ManyToMany(cascade = [CascadeType.MERGE])
-    @JoinTable(
-        name = "ROLE",
-        joinColumns = [JoinColumn(name = "EMP_NO", referencedColumnName = "EMP_ID")],
-        inverseJoinColumns = [JoinColumn(name = "AUTHORITY_CODE", referencedColumnName = "ROLE_AUTHORITY_CODE")]
-    )
-    var roles: MutableList<Authority>? = null
+    @OneToMany(cascade = [CascadeType.MERGE])
+    @JoinColumn(name = "EMP_NO")
+    var roles: MutableList<Role>? = null
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         val authorities = mutableListOf<GrantedAuthority>()
         roles?.forEach { authority ->
-            authorities.add(SimpleGrantedAuthority(authority.authorityName))
+            authorities.add(SimpleGrantedAuthority(authority.roleAuthorityCode.toString()))
         }
         return authorities
     }

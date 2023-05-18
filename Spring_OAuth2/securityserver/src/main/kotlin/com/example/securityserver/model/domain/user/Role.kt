@@ -9,13 +9,19 @@ import javax.persistence.*;
 @Table(name = "ROLE")
 class Role : Serializable {
     @Id
+    @Column(name = "ROLE_AUTHORITY_CODE")
     var roleAuthorityCode: Long? = null
 
-    @Id
+    @Column(name = "EMP_NO")
     var empNo: String? = null
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = User::class)
-    var users: MutableList<User>? = null
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO", insertable =false, updatable = false)
+    var empBase: EmpBase? = null
+
+    @ManyToOne
+    @JoinColumn(name = "ROLE_AUTHORITY_CODE", insertable =false, updatable = false)
+    var authority: Authority? = null
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -31,6 +37,6 @@ class Role : Serializable {
     }
 
     override fun toString(): String {
-        return "ROLE(roleAuthorityCode=$roleAuthorityCode, empNo=$empNo, users=$users)"
+        return "ROLE(roleAuthorityCode=$roleAuthorityCode, empNo=$empNo, empBase=$empBase, authority=$authority)"
     }
 }

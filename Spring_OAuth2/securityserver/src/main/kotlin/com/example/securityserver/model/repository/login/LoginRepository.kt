@@ -5,6 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface LoginRepository : JpaRepository<User, Long> {
     fun findByEmpId(empId: Long?): User?
-
-    override fun findAll(): MutableList<User>
 }
