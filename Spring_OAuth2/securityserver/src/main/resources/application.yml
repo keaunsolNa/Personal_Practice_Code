@@ -4,7 +4,9 @@ server:
 
 ## jwt secret token
 jwt:
+  header: Authorization
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+  token-validity-in-seconds: 86400
 
 ## 오라클 드라이버 설정
 spring:
@@ -32,4 +34,9 @@ spring:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
-      
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secrect: {JWT_SECRECT}
+
