@@ -1,33 +1,36 @@
 {
-  "name": "nextjs",
+  "name": "inflearn-nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-icons/all-files": "^4.1.0",
-    "@types/node": "20.2.3",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
-    "autoprefixer": "10.4.14",
+    "@next/font": "13.0.7",
+    "@types/node": "18.11.17",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.9",
+    "copy-to-clipboard": "^3.3.3",
     "eslint": "8.22.0",
-    "eslint-config-next": "13.4.3",
-    "next": "13.4.3",
-    "postcss": "8.4.23",
+    "eslint-config-next": "13.0.7",
+    "firebase": "^9.15.0",
+    "next": "13.0.7",
+    "next-seo": "^5.15.0",
+    "next-sitemap": "^3.1.44",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.8.0",
-    "react-icons-all": "^4.5.1",
-    "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "react-icons": "^4.7.1",
+    "sass": "^1.57.1",
+    "swr": "^2.0.0",
+    "typescript": "4.9.4"
   },
   "devDependencies": {
-    "eslint-config-prettier": "^8.8.0",
-    "prettier": "2.8.8",
-    "sass": "^1.62.1"
+    "@types/navermaps": "^3.6.1",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "2.8.1"
   }
 }

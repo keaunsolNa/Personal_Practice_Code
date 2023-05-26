@@ -51,14 +51,7 @@ class LoginServiceImpl : LoginService {
     // 토큰의 ID로 유저 정보 가져오기
     override fun getUser(userId: String): User? {
 
-        println("Get User")
-        println(userId is String)
-        println(userId)
         val employee: User? = loginRepository!!.findByEmpId(userId.toLong())
-
-        println("After JPA")
-        println(employee)
-
         return employee ?: null
     }
 

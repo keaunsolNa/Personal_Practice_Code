@@ -7,6 +7,7 @@ import com.example.securityserver.model.domain.user.User
 import com.example.securityserver.model.repository.login.LoginRepository
 import com.example.securityserver.service.LoginService
 import io.jsonwebtoken.ExpiredJwtException
+import io.jsonwebtoken.UnsupportedJwtException
 import lombok.RequiredArgsConstructor
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
@@ -80,11 +81,17 @@ class LoginController(
             userId["ERROR"] = "토큰 기한 만료. 다시 로그인 해 주세요"
 
             // 그 외 에러 발생 시
-        } catch (e: Exception) {
+        } catch (e: SecurityException ) {
 
-            // 에러 출력하고 해당 에러 메시지 Value 할당
-            e.printStackTrace()
-            userId["ERROR"] = e.toString()
+            userId["ERROR"] = "잘못된 JWT 서명입니다."
+
+        } catch (e: UnsupportedJwtException) {
+
+            userId["ERROR"] = "지원되지 않는 JWT 토큰입니다."
+
+        } catch (e: IllegalArgumentException) {
+
+            userId["ERROR"] = "JWT 토큰이 잘못되었습니다."
 
         }
 

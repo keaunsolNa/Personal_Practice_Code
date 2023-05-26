@@ -26,7 +26,6 @@ dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation ("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation ("org.springframework.security:spring-security-test")
 	implementation ("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
@@ -37,17 +36,11 @@ dependencies {
 	implementation ("io.jsonwebtoken:jjwt-jackson:0.11.5")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	runtimeOnly("com.h2database:h2")
 
 	runtimeOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly ("net.coobird:thumbnailator:0.4.8")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
-	testImplementation ("org.webjars:stomp-websocket:2.3.3")
-	testImplementation ("org.springframework:spring-websocket")
-	testImplementation ("org.springframework.boot:spring-boot-starter-websocket")
-	testImplementation ("org.webjars:sockjs-client:1.0.2")
 
 	implementation  ("org.projectlombok:lombok:1.18.26")
 	annotationProcessor ("org.projectlombok:lombok:1.18.26")
