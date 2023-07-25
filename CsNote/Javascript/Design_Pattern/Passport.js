@@ -1,10 +1,6 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 
-// var passport = require('passport')
-    // , LocalStrategy = require('passport-local').Strategy;
-
-
 passport.use(new LocalStrategy(
     function (username, password, done) {
         UserActivation.findOne({ username: username}, function(err, user) {
