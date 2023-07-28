@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<script>
+
+    $(document).ready(function() {
+        var gender = "m";
+        var region = "서울";
+        
+        var inputData = {"gender":gender, "region":region};
+        
+        $.ajax({
+            url: "/selectAll",
+            type: "post",
+            data: JSON.stringify(inputData),
+            dataType: "json",
+            contentType:"application/json;charset=UTF-8",
+            async: false,
+            success: function(data){
+                if (data.length == 0) {
+                    alert('조회 결과가 없습니다.');
+                }
+                else {
+                    console.log(data);
+                
+                    for(var i=0; i<data.length;i++) {
+                    var id = data[i]['id'];
+                    var name = data[i]['name'];
+                            var gender = data[i]['gender'];
+                            var region = data[i]['region'];
+                            
+                            console.log('id:' + id);
+                            console.log('name:' + name);
+                            console.log('gender:' + gender);
+                            console.log('region:' + region);
+                } 
+                }
+            },
+            error: function(xhr, status, error){
+            alert(xhr.responseText);
+            },
+            complete: function(xhr, status){}
+        });
+    });
+
+    function RequestPost() {
+        alert('bye')
+    }
+</script>
+<body>
+	<form action="/request" method="get">
+
+        <input type="submit" value="Get Request"></input>
+    </form>
+
+    
+    <button onclick="RequestPost()">Post Request</button>
+</body>
+</html>
