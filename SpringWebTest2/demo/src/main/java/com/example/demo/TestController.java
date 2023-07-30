@@ -40,12 +40,11 @@ public class TestController {
 //    	System.out.println("request.getProtocol() : " + request.getProtocol());
 //    	String returnData = "Get Request Accept";
     	
-
+		
 		String sender = params.keySet().toString().replaceAll("\\[|\\]", "");
 		String msg = params.get(sender);
 		String json = "{\"sender\":\""+sender+"\", \"msg\":\""+msg+"\"}";
 		
-		JSONObject returnValue = new JSONObject(json);
 
     	return json;
     }
