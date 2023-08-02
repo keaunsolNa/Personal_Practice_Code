@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10438cf1-3f19-4ef6-8fb0-3c39cb83ebcf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/unit/products.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/unit/products.test.js" afterDir="false" />
-    </list>
+    <list default="true" id="10438cf1-3f19-4ef6-8fb0-3c39cb83ebcf" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +33,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "azul-13",
-    "last_opened_file_path": "C:/Study/TDD",
+    "last_opened_file_path": "D:/WinBackDefault",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,7 +53,6 @@
       <updated>1690847263295</updated>
       <workItem from="1690847264291" duration="17304000" />
       <workItem from="1690886526139" duration="38000" />
-      <workItem from="1690931431281" duration="3120000" />
     </task>
     <servers />
   </component>
