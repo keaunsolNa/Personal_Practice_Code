@@ -2,15 +2,17 @@ const productController = require('../../controller/product')
 const productModel = require('../../models/Product');
 const httpMocks = require('node-mocks-http');
 const newProduct = require("../data/net-product.json");
+const allProdcuts = require("../data/all-products.json");
 
 productModel.create = jest.fn();
+productModel.find = jest.fn();
 
 let req, res, next;
 
 beforeEach(() => {
     req = httpMocks.createRequest();
     res = httpMocks.createResponse();
-    next = null;
+    next = jest.fn();
 })
 describe("Roduct Controller Create", () => {
 
@@ -18,26 +20,65 @@ describe("Roduct Controller Create", () => {
         req.body = newProduct;
     })
 
-    it("should hava a createProdcut function", () => {
-        expect(typeof productController.createProduct).toBe("function");
-    });
-
-    it("should call ProductModel.create", () => {
-        productController.createProduct(req, res, next);
+    it("should have a createProduct funtcion", () => {
+        expect(typeof productController.createProduct).toBe("function")
+    })
+    it("should call ProductModel.create", async () => {
+        await productController.createProduct(req, res, next);
         expect(productModel.create).toBeCalledWith(newProduct);
-    });
-
-    it("should return 201 response code", () => {
-        productController.createProduct(req, res, next);
+    })
+    it("should return 201 response code", async () => {
+        await productController.createProduct(req, res, next);
         expect(res.statusCode).toBe(201);
         expect(res._isEndCalled()).toBeTruthy();
-    });
-
-    it("should return json body in response", () => {
+    })
+    it("should return json body in response", async () => {
         productModel.create.mockReturnValue(newProduct)
-        productController.createProduct(req, res, next);
+        await productController.createProduct(req, res, next);
         expect(res._getJSONData()).toStrictEqual(newProduct)
     })
 
+    it("should handle errors", async () => {
+        const errorMessage = { message: "description property missing" };
+        const rejectedPromise = Promise.reject(errorMessage);
+        productModel.create.mockReturnValue(rejectedPromise);
+        await productController.createProduct(req, res, next);
+        expect(next).toBeCalledWith(errorMessage);
+    });
+
 });
+
+describe("Product Controller Get", () => {
+
+    it("should have a getProducts function", () => {
+        expect(typeof productController.getProducts).toBe("function");
+
+    });
+
+    it("should call ProductModel.find({})", async () => {
+       await productController.getProducts(req, res, next);
+       expect(productModel.find).toHaveBeenCalledWith({})
+    });
+
+    it("should return 200 response", async () => {
+        await productController.getProducts(req, res, next);
+        expect(res.statusCode).toBe(200);
+        expect(res._isEndCalled()).toBeTruthy();
+    });
+
+    it("should return json body in response", async() => {
+        productModel.find.mockReturnValue(allProdcuts)
+        await productController.getProducts(req, res, next);
+        expect(res._getJSONData()).toStrictEqual(allProdcuts)
+    });
+
+    it("should handle errors", async () => {
+        const errorMessage = { message : "Error finding product data"}
+        const rejectedPromise = Promise.reject(errorMessage);
+        productModel.find.mockReturnValue(rejectedPromise);
+        await productController.getProducts(req, res, next);
+        expect(next).toHaveBeenCalledWith(errorMessage);
+    });
+});
+
 
