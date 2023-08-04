@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10438cf1-3f19-4ef6-8fb0-3c39cb83ebcf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test/data/all-products.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/integration/products.int.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/product.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/integration/products.int.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/integration/products.int.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/unit/products.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/unit/products.test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +40,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;azul-13&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Study/TDD&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/mantis-material-react-2.1.0-eu3ipl&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -52,7 +52,19 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Jest.Get /api/product/:productId">
+    <configuration name="Get /api/product/:productId" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/integration/products.int.test.js" />
+      <test-names>
+        <test-name value="Get /api/product/:productId" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="POST /api/products" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
@@ -65,8 +77,37 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="Product Controller GetById.should handle errors" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/unit/products.test.js" />
+      <test-names>
+        <test-name value="Product Controller GetById" />
+        <test-name value="should handle errors" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Product Controller GetById.should return 404 when item doesnt exist" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/test/unit/products.test.js" />
+      <test-names>
+        <test-name value="Product Controller GetById" />
+        <test-name value="should return 404 when item doesnt exist" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.Get /api/product/:productId" />
+        <item itemvalue="Jest.Product Controller GetById.should return 404 when item doesnt exist" />
+        <item itemvalue="Jest.Product Controller GetById.should handle errors" />
         <item itemvalue="Jest.POST /api/products" />
       </list>
     </recent_temporary>
@@ -85,6 +126,8 @@
       <workItem from="1690975329660" duration="595000" />
       <workItem from="1691018618818" duration="9393000" />
       <workItem from="1691058476293" duration="49000" />
+      <workItem from="1691104345186" duration="6732000" />
+      <workItem from="1691138759374" duration="648000" />
     </task>
     <servers />
   </component>

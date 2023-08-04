@@ -4,12 +4,11 @@ const app = express();
 const productRoutes = require("./routes");
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://<ID>:<pwd>@<Cluster>.c2d9bui.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://<user>:<pwd>@<clusterName>.c2d9bui.mongodb.net/?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
-    .then(() => console.log('MongoDb Connected...'))
     .catch(err => console.log(err));
 
 app.use(express.json());
