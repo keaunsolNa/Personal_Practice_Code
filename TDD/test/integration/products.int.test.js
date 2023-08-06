@@ -44,3 +44,34 @@ it("Get id doenst exist /api/product/:productId", async () => {
     const response = await request(app).get('/api/products/64cb0274a1c1ae609bc7f078');
     expect(response.statusCode).toBe(404);
 });
+
+it("PUT /api/products", async() => {
+    const res = await request(app)
+                .put("/api/products/"+firstProduct._id)
+                .send({ name: "Keaunsol2", description: "Good2"});
+    expect(res.statusCode).toBe(200)
+    expect(res.body.name).toBe("Keaunsol2")
+    expect(res.body.description).toBe("Good2")
+});
+
+it("should return 404 on PUT /api/products", async () => {
+    const res = await request(app)
+        .put("/api/products" +"64cb0274a1c1ae609bc7f079")
+        .send({ name: "Keaunsol2", description: "Good2"})
+    expect(res.statusCode).toBe(404);
+});
+
+it("DELETE /api/products", async () => {
+    const res = await request(app)
+        .delete("/api/products/" + firstProduct._id)
+        .send();
+    expect(res.statusCode).toBe(200);
+});
+
+it("DELETE id doenst exist /api/products/:productId", async () => {
+    const res = await request(app)
+        .delete("/api/products/" + firstProduct._id)
+        .send();
+    expect(res.statusCode).toBe(404);
+});
+

@@ -4,7 +4,7 @@ const app = express();
 const productRoutes = require("./routes");
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://<user>:<pwd>@<clusterName>.c2d9bui.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://<userId>:<userPwd>@<clusterName>.c2d9bui.mongodb.net/?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
