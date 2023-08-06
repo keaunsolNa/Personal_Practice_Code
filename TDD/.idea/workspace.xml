@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10438cf1-3f19-4ef6-8fb0-3c39cb83ebcf" name="Changes" comment="" />
+    <list default="true" id="10438cf1-3f19-4ef6-8fb0-3c39cb83ebcf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/integration/products.int.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/integration/products.int.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/unit/products.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/unit/products.test.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
